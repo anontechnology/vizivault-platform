@@ -1,0 +1,31 @@
+apiVersion: v2
+appVersion: 0.1.0
+dependencies:
+  - name: common
+    repository: https://charts.bitnami.com/bitnami
+    tags:
+      - bitnami-common
+    version: 1.x.x
+  - name: mongodb
+    condition: mongodb.enabled
+    repository: https://charts.bitnami.com/bitnami
+    version: 10.12.4
+  - name: rabbitmq
+    condition: rabbitmq.enabled
+    repository: https://charts.bitnami.com/bitnami
+    version: 8.11.9
+description: Chart for the ViziVault Platform
+engine: gotpl
+keywords:
+  - vizivault
+  - api
+  - enterprise
+  - platform
+  - crypto
+  - security
+maintainers:
+  - name: Anontech
+    email: engineering@anontech.io
+    url: https://anontech.io
+name: vizivault-platform
+version: 1.0.0
