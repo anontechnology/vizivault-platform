@@ -1,0 +1,80 @@
+# Global
+image:
+  registry: us.icr.io
+  pullSecrets:
+    - all-icr-io
+
+# ViziVault Application
+vizivault:
+  name: "webapp"
+  image:
+    repository: anontech/vault-enterprise
+    tag: dev
+    pullPolicy: IfNotPresent
+  admin:
+    username: root
+    password:
+
+# Vault API
+api:
+  image:
+    repository: anontech/nox
+    tag: dev
+    pullPolicy: IfNotPresent
+
+# Notification Service
+alerts:
+  image:
+    repository: anontech/nova
+    tag: dev
+    pullPolicy: IfNotPresent
+
+# Cipher Encryption Service
+cipher:
+  image:
+    repository: anontech/cipher
+    tag: dev
+    pullPolicy: IfNotPresent
+
+# Arbiter Validation Service
+arbiter:
+  image:
+    repository: anontech/arbiter
+    tag: dev
+    pullPolicy: IfNotPresent
+
+# Database Configuration
+# These values will be ignored if mongodb.enabled is set to true
+database:
+  authDb: admin
+  username: vizivault-platform
+  password:
+  host: localhost
+  port: 27017
+  secretName:
+
+rabbit:
+  username: user
+  password:
+  host:
+  port:
+  secretName:
+
+
+# MongoDB Configuration
+# https://github.com/bitnami/charts/blob/master/bitnami/mongodb/values.yaml
+mongodb:
+  enabled: true
+  architecture: standalone
+  useStatefulSet: true
+  auth:
+    database: admin
+    username: vizivault-platform
+  initdbScriptsConfigMap: vizivault-platform-initdb
+
+# RabbitMQ Configuration
+# https://github.com/bitnami/charts/blob/master/bitnami/rabbitmq/values.yaml
+rabbitmq:
+  enabled: true
+  auth:
+    username: vizivault-platform
