@@ -38,6 +38,17 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
+            - name: VIZIVAULT_ADMIN_USERNAME
+              value: {{ .Values.vizivault.admin.username | quote }}
+            - name: VIZIVAULT_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: vizivault-platform-secrets
+                  key: vizivault-admin-password
+            - name: VIZIVAULT_ADMIN_EMAIL
+              value: {{ .Values.vizivault.admin.email | quote }}
+            - name: VIZIVAULT_ADMIN_NAME
+              value: {{ .Values.vizivault.admin.name | quote }}
             - name: SPRING_DATA_MONGODB_HOST
               value: {{ include "vizivault-platform.databaseHost" . | quote }}
             - name: SPRING_DATA_MONGODB_PORT

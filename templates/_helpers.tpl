@@ -1,6 +1,21 @@
 {{/* vim: set filetype=mustache: */}}
 
 {{/*
+Create a random alphanumeric password
+*/}}
+{{- define "vizivault-platform.randomPassword" -}}
+{{- randAlphaNum 9 -}}{{- randNumeric 1 -}}
+{{- end -}}
+
+{{/*
+Get the user supplied password or use a random string
+*/}}
+{{- define "vizivault-platform.password" -}}
+{{- $password := .Values.vizivault.admin.password -}}
+{{- default (include "vizivault-platform.randomPassword" .) $password -}}
+{{- end -}}
+
+{{/*
 Generate name
 */}}
 {{- define "vizivault-platform.name" -}}

@@ -12,8 +12,10 @@ vizivault:
     tag: dev
     pullPolicy: IfNotPresent
   admin:
-    username: root
+    username: vizivault
     password:
+    email: "admin@anontech.io"
+    name: "ViziVault Admin"
 
 # Vault API
 api:
