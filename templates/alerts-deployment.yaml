@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "vizivault-platform.fullname" (dict "root" . "app" .Values.alerts.name) }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.alerts.name }}
+    helm.sh/chart: {{ include "vizivault-platform.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ printf "vizivault-%s" .Values.alerts.name }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ printf "vizivault-%s" .Values.alerts.name }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ include "vizivault-platform.image" (dict "root" .Values.image "app" .Values.alerts.image ) }}
+          imagePullPolicy: {{ .Values.alerts.image.pullPolicy }}
+          volumeMounts:
+            - mountPath: "/usr/src/app/key"
+              name: credentials
+              readOnly: true
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+            - name: ws
+              containerPort: 3001
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: DATABASE_HOST
+              value: {{ include "vizivault-platform.databaseHost" . | quote }}
+            - name: DATABASE_PORT
+              value: {{ include "vizivault-platform.databasePort" . | quote }}
+            - name: DATABASE_AUTH_SOURCE
+              value: {{ include "vizivault-platform.authDb" . | quote }}
+            - name: DATABASE_USER
+              value: vizivault-platform
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "vizivault-platform.databaseSecretName" . }}
+                  key: mongodb-password
+            - name: MONGO_URI
+              value: {{ printf "mongodb://$(DATABASE_USER):$(DATABASE_PASSWORD)@$(DATABASE_HOST):$(DATABASE_PORT)/alerts?authSource=$(DATABASE_AUTH_SOURCE)"}}
+            - name: SIGNING_KEY_PATH
+              value: key/secret.key
+      {{- include "vizivault-platform.imagePullSecrets" . | nindent 6 }}
+      volumes:
+        - name: credentials
+          secret:
+            secretName: vizivault-platform-secrets
+            items:
+              - key: token-signing-key
+                path: secret.key
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

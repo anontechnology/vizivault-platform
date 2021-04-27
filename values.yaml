@@ -32,6 +32,7 @@ api:
 
 # Notification Service
 alerts:
+  name: "alerts"
   image:
     repository: anontech/nova
     tag: dev

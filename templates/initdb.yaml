@@ -16,8 +16,6 @@ data:
         { role: "readWrite", db: "webapp" },
         { role: "readWrite", db: "vault" },
         { role: "readWrite", db: "arbiter" },
-        { role: "readWrite", db: "nova" },
+        { role: "readWrite", db: "alerts" },
       ]
     )
-
-
