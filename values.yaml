@@ -57,6 +57,8 @@ arbiter:
     repository: anontech/arbiter
     tag: dev
     pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
 
 # Database Configuration
 # These values will be ignored if mongodb.enabled is set to true
