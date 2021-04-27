@@ -27,14 +27,6 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /actuator/health
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /actuator/health
-              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
@@ -54,12 +46,12 @@ spec:
             - name: SPRING_DATA_MONGODB_PORT
               value: {{ include "vizivault-platform.databasePort" . | quote }}
             - name: SPRING_DATA_MONGODB_USERNAME
-              value: root
+              value: vizivault-platform
             - name: SPRING_DATA_MONGODB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ include "vizivault-platform.databaseSecretName" . }}
-                  key: mongodb-root-password
+                  key: mongodb-password
             - name: SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE
               value: {{ include "vizivault-platform.authDb" . | quote }}
             - name: SPRING_DATA_MONGODB_DATABASE
