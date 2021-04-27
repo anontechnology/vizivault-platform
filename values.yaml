@@ -37,6 +37,8 @@ alerts:
     repository: anontech/nova
     tag: dev
     pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
 
 # Cipher Encryption Service
 cipher:
