@@ -16,6 +16,8 @@ vizivault:
     password:
     email: "admin@anontech.io"
     name: "ViziVault Admin"
+  service:
+    type: ClusterIP
 
 # Vault API
 api:
