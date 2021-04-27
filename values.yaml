@@ -21,10 +21,14 @@ vizivault:
 
 # Vault API
 api:
+  name: "api"
+  replicas: 1
   image:
     repository: anontech/nox
     tag: dev
     pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
 
 # Notification Service
 alerts:
@@ -35,6 +39,7 @@ alerts:
 
 # Cipher Encryption Service
 cipher:
+  name: "cipher"
   image:
     repository: anontech/cipher
     tag: dev
@@ -42,6 +47,7 @@ cipher:
 
 # Arbiter Validation Service
 arbiter:
+  name: "arbiter"
   image:
     repository: anontech/arbiter
     tag: dev
@@ -57,6 +63,8 @@ database:
   port: 27017
   secretName:
 
+# RabbitMQ Configuration
+# These values will be ignored if rabbitmq.enabled is set to true
 rabbit:
   username: user
   password:
