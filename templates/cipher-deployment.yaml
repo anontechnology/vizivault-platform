@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "vizivault-platform.fullname" (dict "root" . "app" .Values.cipher.name) }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.cipher.name }}
+    helm.sh/chart: {{ include "vizivault-platform.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ printf "vizivault-%s" .Values.cipher.name }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ printf "vizivault-%s" .Values.cipher.name }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ include "vizivault-platform.image" (dict "root" .Values.image "app" .Values.cipher.image ) }}
+          imagePullPolicy: {{ .Values.cipher.image.pullPolicy }}
+          env:
+            - name: HOSTNAME
+              value: 0.0.0.0
+          ports:
+            - name: grpc
+              containerPort: 50051
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: grpc
+          readinessProbe:
+            tcpSocket:
+              port: grpc
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- include "vizivault-platform.imagePullSecrets" . | nindent 6 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

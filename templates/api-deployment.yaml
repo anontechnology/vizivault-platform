@@ -59,11 +59,11 @@ spec:
             - name: NOX_API_AUTHORIZATION
               value: "true"
             - name: CIPHER_HOST
-              value: {{ printf "vizivault-%s" .Values.cipher.name }}
+              value: vizivault-platform-cipher-service
             - name: CIPHER_PORT
               value: "50051"
             - name: ARBITER_HOST
-              value: {{ printf "vizivault-%s" .Values.arbiter.name }}
+              value: vizivault-platform-arbiter-service
             - name: ARBITER_PORT
               value: "50051"
             - name: SPRING_RABBITMQ_VIRTUAL_HOST

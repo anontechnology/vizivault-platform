@@ -47,6 +47,8 @@ cipher:
     repository: anontech/cipher
     tag: dev
     pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
 
 # Arbiter Validation Service
 arbiter:
