@@ -1,5 +1,4 @@
-# Global
-image:
+global:
   registry: us.icr.io
   pullSecrets:
     - all-icr-io

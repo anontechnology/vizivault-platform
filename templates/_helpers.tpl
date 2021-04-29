@@ -42,14 +42,14 @@ Create chart name and version as used by the chart label.
 Return the image name
 */}}
 {{- define "vizivault-platform.image" -}}
-{{- printf "%s/%s:%s" .root.registry .app.repository .app.tag -}}
+{{- printf "%s/%s:%s" .root.global.registry .app.repository .app.tag -}}
 {{- end -}}
 
 {{/*
 Return the pull secrets
 */}}
 {{- define "vizivault-platform.imagePullSecrets" -}}
-{{- include "common.images.pullSecrets" (dict "images" (list .Values.image) "global" .Values.global) -}}
+{{- include "common.images.pullSecrets" . -}}
 {{- end -}}
 
 {{/*

@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: {{ include "vizivault-platform.image" (dict "root" .Values.image "app" .Values.arbiter.image ) }}
+          image: {{ include "vizivault-platform.image" (dict "root" .Values "app" .Values.arbiter.image ) }}
           imagePullPolicy: {{ .Values.arbiter.image.pullPolicy }}
           env:
             - name: HOSTNAME

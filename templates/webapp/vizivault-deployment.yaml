@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: {{ printf "vizivault-%s" .Values.vizivault.name }}
-          image: {{ include "vizivault-platform.image" (dict "root" .Values.image "app" .Values.vizivault.image ) }}
+          image: {{ include "vizivault-platform.image" (dict "root" .Values "app" .Values.vizivault.image ) }}
           imagePullPolicy: {{ .Values.vizivault.image.pullPolicy }}
           ports:
             - name: http

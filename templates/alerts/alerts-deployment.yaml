@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: {{ include "vizivault-platform.image" (dict "root" .Values.image "app" .Values.alerts.image ) }}
+          image: {{ include "vizivault-platform.image" (dict "root" .Values "app" .Values.alerts.image ) }}
           imagePullPolicy: {{ .Values.alerts.image.pullPolicy }}
           volumeMounts:
             - mountPath: "/usr/src/app/key"
