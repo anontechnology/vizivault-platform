@@ -1,3 +1,5 @@
+{{- $webAppUrl := "http://localhost" }}
+
 You have successfully deployed the ViziVault Platform!
 
 Please allow at least five minutes for the platform to become available after a fresh installation.
@@ -7,28 +9,31 @@ To log into the ViziVault Platform Web Application:
 1. Obtain the URL
 
 {{- if .Values.ingress.enabled }}
+  {{- $webAppUrl = include "vizivault-platform.appUrl" . }}
 
   If properly configured, you may find the web application running at:
-  {{ include "vizivault-platform.appUrl" . }}
+  {{ $webAppUrl }}
 
 {{- else if contains "ClusterIP" .Values.vizivault.service.type }}
+  {{- $webAppUrl = "http://127.0.0.1:8080" }}
 
   Port forward the application by running the following command:
   kubectl port-forward --namespace {{ .Release.Namespace }} svc/vizivault-platform-web-service 8080:8080
 
   Visit the application running at:
-  http://127.0.0.1:8080
+  {{ $webAppUrl }}
 
   #####################################################################################
   # WARNING: Realtime notifications / alerts will be unavailable when port forwarding #
   #####################################################################################
 
 {{- else if contains "NodePort" .Values.vizivault.service.type  }}
+  {{- $webAppUrl = "http://$VIZIVAULT_IP:$VIZIVAULT_PORT/" }}
 
   Determine the application address by running the following:
   export VIZIVAULT_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services vizivault-platform-web-service)
   export VIZIVAULT_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
-  echo "ViziVault Web URL: http://$VIZIVAULT_IP:$VIZIVAULT_PORT/"
+  echo "ViziVault Web URL: {{ $webAppUrl }}"
 
 {{- end }}
 
@@ -55,17 +60,27 @@ To access the Vizivault REST API:
   Port forward the application by running the following command:
   kubectl port-forward --namespace {{ .Release.Namespace }} svc/vizivault-platform-api-service 8081:8080
 
-  The API is now available at:
+  The API should now be reachable at:
   http://127.0.0.1:8081
 
 {{- else if contains "NodePort" .Values.vizivault.service.type  }}
 
-  Determine the application address by running the following:
-  export VIZIVAULT_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services vizivault-platform-api-service)
-  export VIZIVAULT_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
-  echo "ViziVault API URL: http://$VIZIVAULT_IP:$VIZIVAULT_PORT/"
+  Determine the API address by running the following:
+  export VIZIVAULT_API_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services vizivault-platform-api-service)
+  export VIZIVAULT_API_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
+  echo "ViziVault API URL: http://$VIZIVAULT_API_IP:$VIZIVAULT_API_PORT/"
 
 {{- end }}
+
+2. Obtain a valid API Key from the Web Application
+
+  As an administrator, create and obtain a new API Key at:
+  {{ $webAppUrl }}/admin/applications
+
+3. Begin using the REST API with the API Key
+
+  Additional documentation can be found at:
+  https://docs.anontech.io/api/endpoints/
 
 
 {{- include "common.warnings.rollingTag" .Values.vizivault.image }}
