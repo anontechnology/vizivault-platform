@@ -10,7 +10,7 @@ metadata:
 spec:
   type: {{ .Values.vizivault.service.type }}
   ports:
-    - name: vizivault-api
+    - name: http
       port: 8080
       protocol: TCP
       targetPort: 8080
