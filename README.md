@@ -57,3 +57,14 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `containerSecurityContext`            | Container security podSecurityContext                                                                                                                                                          | `{ runAsUser: 1001, runAsNonRoot: true }`               |
 | `podSecurityContext`                  | Pod security context                                                                                                                                                                           | `{ fsGroup: 1001 }`                                     |
 | `volumePermissions.enabled`           | Enable init container that changes volume permissions in the data directory (for cases where the default k8s `runAsUser` and `fsUser` values do not work)                                      | `false`                                                 |
+
+### ViziVault Parameters
+
+### REST API Parameters
+
+### Alerting Parameters
+
+### Crypto Parameters
+
+
+### Authorization Parameters
