@@ -5,17 +5,20 @@ image:
     - all-icr-io
 
 ingress:
-  enabled: false
   web:
+    enabled: false
     domain: vizivault.anontech.domain
     tls:
       enabled: false
       secretName: tls-secret
+    annotations: {}
   api:
+    enabled: false
     domain: api.anontech.domain
     tls:
       enabled: false
       secretName: tls-secret
+    annotations: {}
 
 # ViziVault Application
 vizivault:

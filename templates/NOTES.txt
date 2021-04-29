@@ -8,7 +8,7 @@ To log into the ViziVault Platform Web Application:
 
 1. Obtain the URL
 
-{{- if .Values.ingress.enabled }}
+{{- if .Values.ingress.web.enabled }}
   {{- $webAppUrl = include "vizivault-platform.appUrl" . }}
 
   If properly configured, you may find the web application running at:
@@ -50,7 +50,7 @@ To access the Vizivault REST API:
 
 1. Obtain the URL
 
-{{- if .Values.ingress.enabled }}
+{{- if .Values.ingress.api.enabled }}
 
   If properly configured, you may find the API running at:
   {{ include "vizivault-platform.apiUrl" . }}

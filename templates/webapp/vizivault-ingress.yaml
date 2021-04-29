@@ -1,0 +1,36 @@
+{{- if .Values.ingress.web.enabled -}}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: vizivault-platform-web-ingress
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+    helm.sh/chart: {{ include "vizivault-platform.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+  {{- with .Values.ingress.web.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+{{- with .Values.ingress.web }}
+{{- if .tls.enabled }}
+  tls:
+    - hosts:
+        - {{ .domain }}
+      secretName: {{ .tls.secretName }}
+{{- end }}
+  rules:
+    - host: {{ .domain }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: vizivault-platform-web-service
+              servicePort: http
+          - path: /realtime
+            backend:
+              serviceName: vizivault-platform-alerts-service
+              servicePort: ws
+{{- end }}
+{{- end }}
