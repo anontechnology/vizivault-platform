@@ -4,6 +4,19 @@ image:
   pullSecrets:
     - all-icr-io
 
+ingress:
+  enabled: false
+  web:
+    domain: vizivault.anontech.domain
+    tls:
+      enabled: false
+      secretName: tls-secret
+  api:
+    domain: api.anontech.domain
+    tls:
+      enabled: false
+      secretName: tls-secret
+
 # ViziVault Application
 vizivault:
   name: "webapp"
@@ -14,7 +27,7 @@ vizivault:
   admin:
     username: vizivault
     password:
-    email: "admin@anontech.io"
+    email: "admin@anontech.domain"
     name: "ViziVault Admin"
   service:
     type: ClusterIP

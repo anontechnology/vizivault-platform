@@ -166,3 +166,25 @@ Return the RabbitMQ Secret Name
     {{- printf "%s" ( .Values.rabbit.secretName ) -}}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Define the external url for the webapp
+*/}}
+{{- define "vizivault-platform.appUrl" -}}
+{{- if .Values.ingress.web.tls.enabled -}}
+    {{- printf "https://%s" .Values.ingress.web.domain -}}
+{{- else -}}
+    {{- printf "http://%s" .Values.ingress.web.domain -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Define the external url for the api
+*/}}
+{{- define "vizivault-platform.apiUrl" -}}
+{{- if .Values.ingress.api.tls.enabled -}}
+    {{- printf "https://%s" .Values.ingress.api.domain -}}
+{{- else -}}
+    {{- printf "http://%s" .Values.ingress.api.domain -}}
+{{- end -}}
+{{- end -}}

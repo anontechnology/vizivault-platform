@@ -1,0 +1,75 @@
+You have successfully deployed the ViziVault Platform!
+
+Please allow at least five minutes for the platform to become available after a fresh installation.
+
+To log into the ViziVault Platform Web Application:
+
+1. Obtain the URL
+
+{{- if .Values.ingress.enabled }}
+
+  If properly configured, you may find the web application running at:
+  {{ include "vizivault-platform.appUrl" . }}
+
+{{- else if contains "ClusterIP" .Values.vizivault.service.type }}
+
+  Port forward the application by running the following command:
+  kubectl port-forward --namespace {{ .Release.Namespace }} svc/vizivault-platform-web-service 8080:8080
+
+  Visit the application running at:
+  http://127.0.0.1:8080
+
+  #####################################################################################
+  # WARNING: Realtime notifications / alerts will be unavailable when port forwarding #
+  #####################################################################################
+
+{{- else if contains "NodePort" .Values.vizivault.service.type  }}
+
+  Determine the application address by running the following:
+  export VIZIVAULT_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services vizivault-platform-web-service)
+  export VIZIVAULT_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
+  echo "ViziVault Web URL: http://$VIZIVAULT_IP:$VIZIVAULT_PORT/"
+
+{{- end }}
+
+2. Log in using the credentials below
+
+  Username: {{ .Values.vizivault.admin.username }}
+  Password: ********
+
+  To view the admin password, run the following command:
+  kubectl get secret --namespace {{ .Release.Namespace }} vizivault-platform-secrets -o jsonpath="{.data.vizivault-admin-password}" | base64 --decode
+
+
+To access the Vizivault REST API:
+
+1. Obtain the URL
+
+{{- if .Values.ingress.enabled }}
+
+  If properly configured, you may find the API running at:
+  {{ include "vizivault-platform.apiUrl" . }}
+
+{{- else if contains "ClusterIP" .Values.api.service.type }}
+
+  Port forward the application by running the following command:
+  kubectl port-forward --namespace {{ .Release.Namespace }} svc/vizivault-platform-api-service 8081:8080
+
+  The API is now available at:
+  http://127.0.0.1:8081
+
+{{- else if contains "NodePort" .Values.vizivault.service.type  }}
+
+  Determine the application address by running the following:
+  export VIZIVAULT_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services vizivault-platform-api-service)
+  export VIZIVAULT_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
+  echo "ViziVault API URL: http://$VIZIVAULT_IP:$VIZIVAULT_PORT/"
+
+{{- end }}
+
+
+{{- include "common.warnings.rollingTag" .Values.vizivault.image }}
+{{- include "common.warnings.rollingTag" .Values.api.image }}
+{{- include "common.warnings.rollingTag" .Values.alerts.image }}
+{{- include "common.warnings.rollingTag" .Values.cipher.image }}
+{{- include "common.warnings.rollingTag" .Values.arbiter.image }}
