@@ -29,6 +29,9 @@ spec:
         - name: {{ printf "vizivault-%s" .Values.api.name }}
           image: {{ include "vizivault-platform.image" (dict "root" .Values "app" .Values.api.image ) }}
           imagePullPolicy: {{ .Values.api.image.pullPolicy }}
+          {{- if .Values.containerSecurityContext }}
+          securityContext: {{- include "common.tplvalues.render" (dict "value" .Values.containerSecurityContext "context" $) | nindent 12 }}
+          {{- end }}
           ports:
             - name: http
               containerPort: 8080
@@ -86,4 +89,7 @@ spec:
     {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- if .Values.podSecurityContext }}
+      securityContext: {{- include "common.tplvalues.render" (dict "value" .Values.podSecurityContext "context" $) | nindent 8 }}
     {{- end }}

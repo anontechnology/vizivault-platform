@@ -29,6 +29,9 @@ spec:
         - name: {{ .Chart.Name }}
           image: {{ include "vizivault-platform.image" (dict "root" .Values "app" .Values.alerts.image ) }}
           imagePullPolicy: {{ .Values.alerts.image.pullPolicy }}
+          {{- if .Values.containerSecurityContext }}
+          securityContext: {{- include "common.tplvalues.render" (dict "value" .Values.containerSecurityContext "context" $) | nindent 12 }}
+          {{- end }}
           volumeMounts:
             - mountPath: "/usr/src/app/key"
               name: credentials
@@ -87,4 +90,7 @@ spec:
     {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- if .Values.podSecurityContext }}
+      securityContext: {{- include "common.tplvalues.render" (dict "value" .Values.podSecurityContext "context" $) | nindent 8 }}
     {{- end }}
