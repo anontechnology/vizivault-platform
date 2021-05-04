@@ -157,3 +157,18 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `database.port`                  | Port used to connect to the Mongo cluster     | `27017`                                        |
 
 For additional configuration of the MongoDB® Chart, see the [MongoDB® Helm Chart](https://github.com/bitnami/charts/tree/master/bitnami/mongodb)
+
+### RabbitMQ Parameters
+
+**NOTE:** If `rabbitmq.enabled` is `true` then the external RabbitMQ values under `rabbit.*` will be ignored
+
+| Parameter                | Description                                  | Default                                        |
+|--------------------------|----------------------------------------------|------------------------------------------------|
+| `rabbitmq.enabled`       | Enables the deployment of the RabbitMQ chart | `true`                                         |
+| `rabbitmq.auth.username` | Username to connect to the RabbitMQ instance | `vizivault-platform`                           |
+| `rabbit.username`        | Username to connect to the RabbitMQ instance | `user`                                         |
+| `rabbit.password`        | Password to connect to the RabbitMQ instance | _random 10 character long alphanumeric string_ |
+| `rabbit.host`            | Hostname to connect to the RabbitMQ instance | `rabbitmq.local`                               |
+| `rabbit.port`            | Port to connect to the RabbitMQ instance     | `5672`                                         |
+
+For additional configuration of the RabbitMQ Chart, see the [RabbitMQ Helm Chart](https://github.com/bitnami/charts/tree/master/bitnami/rabbitmq)
