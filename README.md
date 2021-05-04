@@ -178,6 +178,6 @@ For additional configuration of the RabbitMQ Chart, see the [RabbitMQ Helm Chart
 ### Exposing the API / Web App
 
 #### Choosing a Method to Expose Services:
-- Ingress: The ingress controller must be installed in the Kubernetes cluster.
-- ClusterIP: Exposes the service on a cluster-internal IP. Choosing this value makes the service only reachable from within the cluster.
-- NodePort: Exposes the service on each Node’s IP at a static port (the NodePort). You’ll be able to contact the NodePort service, from outside the cluster, by requesting NodeIP:NodePort.
+- **Ingress**: The ingress controller must be installed in the Kubernetes cluster.
+- **ClusterIP**: Exposes the service on a cluster-internal IP. Choosing this value makes the service only reachable from within the cluster.
+- **NodePort**: Exposes the service on each Node’s IP at a static port (the NodePort). You’ll be able to contact the NodePort service, from outside the cluster, by requesting NodeIP:NodePort.
