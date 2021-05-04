@@ -1,5 +1,5 @@
 {{- if .Values.ingress.api.enabled -}}
-apiVersion: extensions/v1beta1
+apiVersion: {{ template "common.capabilities.ingress.apiVersion" . }}
 kind: Ingress
 metadata:
   name: vizivault-platform-api-ingress
@@ -32,7 +32,8 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: vizivault-platform-api-service
-              servicePort: http
+              service:
+                name: vizivault-platform-api-service
+                port: http
 {{- end }}
 {{- end }}
