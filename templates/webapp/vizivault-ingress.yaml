@@ -38,7 +38,7 @@ spec:
                 port:
                   name: http
           - path: /realtime
-            pathType: Exact
+            pathType: Prefix
             backend:
               service:
                 name: vizivault-platform-alerts-service
