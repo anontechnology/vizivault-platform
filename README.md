@@ -85,9 +85,9 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `vizivault.admin.email`    | The e-mail address to be set for the ViziVault admin account | `admin.anontech.domain`                        |
 | `vizivault.admin.name`     | The full name to be used for the ViziVault admin account     | `ViziVault Admin`                              |
 | `vizivault.resources`      | The resources to allocate for the deployment                 | `undefined`                                    |
-| `vizivault.affinity`       | Affinity for pod assignment                                  | `{} (evaluated as a template)`                 |
-| `vizivault.nodeSelector`   | Node labels for pod assignment                               | `{} (evaluated as a template)`                 |
-| `vizivault.tolerations`    | Tolerations for pod assignment                               | `[] (evaluated as a template)`                 |
+| `vizivault.affinity`       | Affinity for pod assignment                                  | `{}` (evaluated as a template)                |
+| `vizivault.nodeSelector`   | Node labels for pod assignment                               | `{}` (evaluated as a template)                 |
+| `vizivault.tolerations`    | Tolerations for pod assignment                               | `[]` (evaluated as a template)                |
 
 ### REST API Parameters
 
