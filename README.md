@@ -137,3 +137,18 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `arbiter.affinity`         | Affinity for pod assignment                  | `{}` (evaluated as a template) |
 | `arbiter.nodeSelector`     | Node labels for pod assignment               | `{}` (evaluated as a template) |
 | `arbiter.tolerations`      | Tolerations for pod assignment               | `[]` (evaluated as a template) |
+
+### MongoDB® Parameters
+| Parameter                        | Description                                   | Default                                        |
+|----------------------------------|-----------------------------------------------|------------------------------------------------|
+| `mongodb.enabled`                | Enables the deployment of the MongoDB chart   | `true`                                         |
+| `mongodb.architecture`           | MongoDB® architecture                          | `standalone`                                   |
+| `mongodb.useStatefulSet`         | MongoDB® to use a StatefulSet deployment       | `true`                                         |
+| `mongodb.auth.database`          | Database to create the custom user            | `admin`                                        |
+| `mongodb.auth.username`          | Custom username to create                     | `vizivault-platform`                           |
+| `mongodb.initdbScriptsConfigMap` | ConfigMap with a MongoDB® init scripts         | `vizivault-platform-initdb`                    |
+| `database.authDb`                | Authentication database for the user          | `admin`                                        |
+| `database.username`              | Username to connect to the Mongo cluster      | `vizivault-platform`                           |
+| `database.password`              | Password used to connect to the Mongo cluster | _random 10 character long alphanumeric string_ |
+| `database.host`                  | Hostname used to connect to the Mongo cluster | `localhost`                                    |
+| `database.port`                  | Port used to connect to the Mongo cluster     | `27017`                                        |
