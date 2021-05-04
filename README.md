@@ -138,8 +138,9 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `arbiter.nodeSelector`     | Node labels for pod assignment               | `{}` (evaluated as a template) |
 | `arbiter.tolerations`      | Tolerations for pod assignment               | `[]` (evaluated as a template) |
 
-### MongoDB® Parameters
-> **NOTE:** If `mongodb.enabled` is `true` then the external database values under `database.*` will be ignored
+### Database Parameters
+
+**NOTE:** If `mongodb.enabled` is `true` then the external database values under `database.*` will be ignored
 
 | Parameter                        | Description                                   | Default                                        |
 |----------------------------------|-----------------------------------------------|------------------------------------------------|
@@ -155,4 +156,4 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `database.host`                  | Hostname used to connect to the Mongo cluster | `localhost`                                    |
 | `database.port`                  | Port used to connect to the Mongo cluster     | `27017`                                        |
 
-For additional configuration, see the [MongoDB® Helm Chart](https://github.com/bitnami/charts/tree/master/bitnami/mongodb)
+For additional configuration of the MongoDB® Chart, see the [MongoDB® Helm Chart](https://github.com/bitnami/charts/tree/master/bitnami/mongodb)
