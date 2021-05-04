@@ -57,6 +57,11 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `containerSecurityContext`            | Container security podSecurityContext                                                                                                                                                          | `{ runAsUser: 1001, runAsNonRoot: true }`               |
 | `podSecurityContext`                  | Pod security context                                                                                                                                                                           | `{ fsGroup: 1001 }`                                     |
 | `volumePermissions.enabled`           | Enable init container that changes volume permissions in the data directory (for cases where the default k8s `runAsUser` and `fsUser` values do not work)                                      | `false`                                                 |
+| `vizivault.admin.username` | The username to be created for the ViziVault admin account   | `vizivault`                                    |
+| `vizivault.admin.password` | The password to be set for the ViziVault admin account       | _random 10 character long alphanumeric string_ |
+| `vizivault.admin.email`    | The e-mail address to be set for the ViziVault admin account | `admin.anontech.domain`                        |
+| `vizivault.admin.name`     | The full name to be used for the ViziVault admin account     | `ViziVault Admin`                              |
+
 
 ### External Access Parameters
 
@@ -73,6 +78,16 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `ingress.api.tls.enabled`    | Enables or disables TLS on the Ingress resource                       | `false`                     |
 | `ingress.api.tls.secretName` | Points to the existing secret name that contains the SSL certificates | `nil`                       |
 ### ViziVault Parameters
+| Parameter                  | Description                                                  | Default                                        |
+|----------------------------|--------------------------------------------------------------|------------------------------------------------|
+| `vizivault.admin.username` | The username to be created for the ViziVault admin account   | `vizivault`                                    |
+| `vizivault.admin.password` | The password to be set for the ViziVault admin account       | _random 10 character long alphanumeric string_ |
+| `vizivault.admin.email`    | The e-mail address to be set for the ViziVault admin account | `admin.anontech.domain`                        |
+| `vizivault.admin.name`     | The full name to be used for the ViziVault admin account     | `ViziVault Admin`                              |
+| `vizivault.resources`      | The resources to allocate for the deployment                 | `undefined`                                    |
+| `vizivault.affinity`       | Affinity for pod assignment                                  | `{} (evaluated as a template)`                 |
+| `vizivault.nodeSelector`   | Node labels for pod assignment                               | `{} (evaluated as a template)`                 |
+| `vizivault.tolerations`    | Tolerations for pod assignment                               | `[] (evaluated as a template)`                 |
 
 ### REST API Parameters
 
