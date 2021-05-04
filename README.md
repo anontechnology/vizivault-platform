@@ -58,6 +58,21 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `podSecurityContext`                  | Pod security context                                                                                                                                                                           | `{ fsGroup: 1001 }`                                     |
 | `volumePermissions.enabled`           | Enable init container that changes volume permissions in the data directory (for cases where the default k8s `runAsUser` and `fsUser` values do not work)                                      | `false`                                                 |
 
+### External Access Parameters
+
+| Parameter                  | Description                                                           | Default                   |
+|----------------------------|-----------------------------------------------------------------------|---------------------------|
+| ingress.web.enabled        | Enables the ingress for the ViziVault web application (public access) | false                     |
+| ingress.web.domain         | The domain that the ingress uses for the host values                  | vizivault.anontech.domain |
+| ingress.web.annotations    | Annotations used in the ingress resource                              | {}                        |
+| ingress.web.tls.enabled    | Enables or disables TLS on the Ingress resource                       | false                     |
+| ingress.web.tls.secretName | Points to the existing secret name that contains the SSL certificates | nil                       |
+| ingress.api.enabled        | Enables the ingress for the ViziVault REST API (public access)        | false                     |
+| ingress.api.domain         | The domain that the ingress uses for the host values                  | api.anontech.domain       |
+| ingress.api.annotations    | Annotations used in the ingress resource                              | {}                        |
+| ingress.api.tls.enabled    | Enables or disables TLS on the Ingress resource                       | false                     |
+| ingress.api.tls.secretName | Points to the existing secret name that contains the SSL certificates | nil                       |
+
 ### ViziVault Parameters
 
 ### REST API Parameters
