@@ -103,8 +103,37 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `api.tolerations`      | Tolerations for pod assignment               | `[]` (evaluated as a template) |
 
 ### Alerting Parameters
+| Parameter                 | Description                                  | Default                        |
+|---------------------------|----------------------------------------------|--------------------------------|
+| `alerts.name`             | The name of the Alerts deployment            | `alerts`                       |
+| `alerts.image.repository` | Repository for the Alerts image              | `anontech/nova`                |
+| `alerts.image.tag`        | Tag for the Alerts image                     | `{TAG_NAME}`                   |
+| `alerts.image.pullPolicy` | Pull policy for the Alerts image             | `IfNotPresent`                 |
+| `alerts.resources`        | The resources to allocate for the deployment | `undefined`                    |
+| `alerts.affinity`         | Affinity for pod assignment                  | `{}` (evaluated as a template) |
+| `alerts.nodeSelector`     | Node labels for pod assignment               | `{}` (evaluated as a template) |
+| `alerts.tolerations`      | Tolerations for pod assignment               | `[]` (evaluated as a template) |
 
 ### Crypto Parameters
-
+| Parameter                 | Description                                  | Default                        |
+|---------------------------|----------------------------------------------|--------------------------------|
+| `cipher.name`             | The name of the Cipher deployment            | `cipher`                       |
+| `cipher.image.repository` | Repository for the Cipher image              | `anontech/cipher`                |
+| `cipher.image.tag`        | Tag for the Cipher image                     | `{TAG_NAME}`                   |
+| `cipher.image.pullPolicy` | Pull policy for the Cipher image             | `IfNotPresent`                 |
+| `cipher.resources`        | The resources to allocate for the deployment | `undefined`                    |
+| `cipher.affinity`         | Affinity for pod assignment                  | `{}` (evaluated as a template) |
+| `cipher.nodeSelector`     | Node labels for pod assignment               | `{}` (evaluated as a template) |
+| `cipher.tolerations`      | Tolerations for pod assignment               | `[]` (evaluated as a template) |
 
 ### Authorization Parameters
+| Parameter                  | Description                                  | Default                        |
+|----------------------------|----------------------------------------------|--------------------------------|
+| `arbiter.name`             | The name of the Arbiter deployment           | `arbiter`                      |
+| `arbiter.image.repository` | Repository for the Arbiter image             | `anontech/arbiter`             |
+| `arbiter.image.tag`        | Tag for the Arbiter image                    | `{TAG_NAME}`                   |
+| `arbiter.image.pullPolicy` | Pull policy for the Arbiter image            | `IfNotPresent`                 |
+| `arbiter.resources`        | The resources to allocate for the deployment | `undefined`                    |
+| `arbiter.affinity`         | Affinity for pod assignment                  | `{}` (evaluated as a template) |
+| `arbiter.nodeSelector`     | Node labels for pod assignment               | `{}` (evaluated as a template) |
+| `arbiter.tolerations`      | Tolerations for pod assignment               | `[]` (evaluated as a template) |
