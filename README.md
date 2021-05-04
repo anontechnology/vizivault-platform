@@ -89,7 +89,7 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `vizivault.nodeSelector`   | Node labels for pod assignment                               | `{}` (evaluated as a template)                 |
 | `vizivault.tolerations`    | Tolerations for pod assignment                               | `[]` (evaluated as a template)                |
 
-### REST API Parameters
+### Vault API Parameters
 | Parameter              | Description                                  | Default                        |
 |------------------------|----------------------------------------------|--------------------------------|
 | `api.name`             | The name of the API deployment               | `api`                          |
