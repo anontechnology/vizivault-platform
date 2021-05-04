@@ -139,6 +139,7 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `arbiter.tolerations`      | Tolerations for pod assignment               | `[]` (evaluated as a template) |
 
 ### MongoDB® Parameters
+> **NOTE:** If `mongodb.enabled` is `true` then the external database values under `database.*` will be ignored
 | Parameter                        | Description                                   | Default                                        |
 |----------------------------------|-----------------------------------------------|------------------------------------------------|
 | `mongodb.enabled`                | Enables the deployment of the MongoDB chart   | `true`                                         |
@@ -152,3 +153,5 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `database.password`              | Password used to connect to the Mongo cluster | _random 10 character long alphanumeric string_ |
 | `database.host`                  | Hostname used to connect to the Mongo cluster | `localhost`                                    |
 | `database.port`                  | Port used to connect to the Mongo cluster     | `27017`                                        |
+
+For additional configuration, see the [MongoDB® Helm Chart](https://github.com/bitnami/charts/tree/master/bitnami/mongodb)
