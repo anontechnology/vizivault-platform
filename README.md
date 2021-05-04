@@ -140,6 +140,7 @@ The following tables list the configurable parameters for the ViziVault Platform
 
 ### MongoDB® Parameters
 > **NOTE:** If `mongodb.enabled` is `true` then the external database values under `database.*` will be ignored
+
 | Parameter                        | Description                                   | Default                                        |
 |----------------------------------|-----------------------------------------------|------------------------------------------------|
 | `mongodb.enabled`                | Enables the deployment of the MongoDB chart   | `true`                                         |
