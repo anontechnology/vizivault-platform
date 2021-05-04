@@ -1,6 +1,6 @@
 global:
   registry: us.icr.io
-  pullSecrets:
+  imagePullSecrets:
     - all-icr-io
 
 ingress:
@@ -90,8 +90,8 @@ database:
 rabbit:
   username: user
   password:
-  host:
-  port:
+  host: rabbitmq.local
+  port: 5672
   secretName:
 
 

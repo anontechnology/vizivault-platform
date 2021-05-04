@@ -44,7 +44,7 @@ The following tables list the configurable parameters for the ViziVault Platform
 | Parameter                 | Description                                     | Default                                                 |
 |---------------------------|-------------------------------------------------|---------------------------------------------------------|
 | `global.registry`    | Global Docker image registry                    | `nil`                                                   |
-| `global.pullSecrets` | Global Docker registry secret names as an array | `[]` (does not add image pull secrets to deployed pods) |
+| `global.imagePullSecrets` | Global Docker registry secret names as an array | `[]` (does not add image pull secrets to deployed pods) |
 | `global.storageClass`     | Global storage class for dynamic provisioning   | `nil`                                                   |
 
 ### Common Parameters

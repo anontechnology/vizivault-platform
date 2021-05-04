@@ -49,7 +49,7 @@ Return the image name
 Return the pull secrets
 */}}
 {{- define "vizivault-platform.imagePullSecrets" -}}
-{{- include "common.images.pullSecrets" . -}}
+{{- include "common.images.pullSecrets" (dict "global" .Values.global) -}}
 {{- end -}}
 
 {{/*
