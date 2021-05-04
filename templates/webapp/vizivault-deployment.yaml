@@ -37,7 +37,7 @@ spec:
               containerPort: 8080
               protocol: TCP
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml .Values.vizivault.resources | nindent 12 }}
           env:
             - name: VIZIVAULT_ADMIN_USERNAME
               value: {{ .Values.vizivault.admin.username | quote }}
@@ -79,15 +79,15 @@ spec:
             - name: SPRING_RABBITMQ_VIRTUAL_HOST
               value: "/"
       {{- include "vizivault-platform.imagePullSecrets" . | nindent 6 }}
-      {{- with .Values.nodeSelector }}
+      {{- with .Values.vizivault.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-    {{- with .Values.affinity }}
+    {{- with .Values.vizivault.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-    {{- with .Values.tolerations }}
+    {{- with .Values.vizivault.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}

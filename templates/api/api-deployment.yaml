@@ -37,7 +37,7 @@ spec:
               containerPort: 8080
               protocol: TCP
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml .Values.api.resources | nindent 12 }}
           env:
             - name: SPRING_DATA_MONGODB_HOST
               value: {{ include "vizivault-platform.databaseHost" . | quote }}
@@ -78,15 +78,15 @@ spec:
             - name: SPRING_RABBITMQ_VIRTUAL_HOST
               value: "/"
       {{- include "vizivault-platform.imagePullSecrets" . | nindent 6 }}
-      {{- with .Values.nodeSelector }}
+      {{- with .Values.api.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-    {{- with .Values.affinity }}
+    {{- with .Values.api.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-    {{- with .Values.tolerations }}
+    {{- with .Values.api.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}

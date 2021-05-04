@@ -90,6 +90,17 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `vizivault.tolerations`    | Tolerations for pod assignment                               | `[]` (evaluated as a template)                |
 
 ### REST API Parameters
+| Parameter              | Description                                  | Default                        |
+|------------------------|----------------------------------------------|--------------------------------|
+| `api.name`             | The name of the API deployment               | `api`                          |
+| `api.replicas`         | The number of replicas for the API           | `1`                            |
+| `api.image.repository` | Repository for the API image                 | `anontech/nox`                 |
+| `api.image.tag`        | Tag for the API image                        | `{TAG_NAME}`                   |
+| `api.image.pullPolicy` | Pull policy for the API image                | `IfNotPresent`                 |
+| `api.resources`        | The resources to allocate for the deployment | `undefined`                    |
+| `api.affinity`         | Affinity for pod assignment                  | `{}` (evaluated as a template) |
+| `api.nodeSelector`     | Node labels for pod assignment               | `{}` (evaluated as a template) |
+| `api.tolerations`      | Tolerations for pod assignment               | `[]` (evaluated as a template) |
 
 ### Alerting Parameters
 
