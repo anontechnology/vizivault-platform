@@ -31,14 +31,18 @@ spec:
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
               service:
                 name: vizivault-platform-web-service
-                port: http
+                port:
+                  name: http
           - path: /realtime
+            pathType: Exact
             backend:
               service:
                 name: vizivault-platform-alerts-service
-                port: ws
+                port:
+                  name: ws
 {{- end }}
 {{- end }}
