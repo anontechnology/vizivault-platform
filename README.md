@@ -181,3 +181,14 @@ For additional configuration of the RabbitMQ Chart, see the [RabbitMQ Helm Chart
 - **Ingress**: The ingress controller must be installed in the Kubernetes cluster.
 - **ClusterIP**: Exposes the service on a cluster-internal IP. Choosing this value makes the service only reachable from within the cluster.
 - **NodePort**: Exposes the service on each Node’s IP at a static port (the NodePort). You’ll be able to contact the NodePort service, from outside the cluster, by requesting NodeIP:NodePort.
+
+## Troubleshooting
+
+### MongoDB / RabbitMQ Credentials are Failing
+If you are using the included MongoDB and/or RabbitMQ charts and have recently reinstalled the platform, you may be receiving authentication errors when the services boot.
+
+This is a common issue with StatefulSets where the PVCs (Persistent Volume Claims) and associated PVs (Persistent Volumes) are not cleaned up after uninstalling a release.
+
+To resolve the issue, you must remove the existing PVCs before installing the chart again.
+
+For more information, please see [Persistence Volumes (PVs) Retained From Previous Releases](https://docs.bitnami.com/general/how-to/troubleshoot-helm-chart-issues/#persistence-volumes-pvs-retained-from-previous-releases)
