@@ -25,7 +25,7 @@ vizivault:
   image:
     repository: anontech/vault-enterprise
     tag: latest
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
   admin:
     username: vizivault
     password:
@@ -41,7 +41,7 @@ api:
   image:
     repository: anontech/nox
     tag: latest
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
   service:
     type: ClusterIP
 
@@ -51,7 +51,7 @@ alerts:
   image:
     repository: anontech/nova
     tag: latest
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
   service:
     type: ClusterIP
 
@@ -61,7 +61,7 @@ cipher:
   image:
     repository: anontech/cipher
     tag: latest
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
   service:
     type: ClusterIP
 
@@ -71,9 +71,15 @@ arbiter:
   image:
     repository: anontech/arbiter
     tag: latest
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
   service:
     type: ClusterIP
+
+initializer:
+  image:
+    repository: anontech/initializer
+    tag: 0.1.6
+    pullPolicy: IfNotPresent
 
 # Database Configuration
 # These values will be ignored if mongodb.enabled is set to true

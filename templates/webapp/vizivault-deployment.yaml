@@ -89,7 +89,7 @@ spec:
                   key: token-signing-key
       initContainers:
         - name: initialize-webapp
-          image: us.icr.io/anontech/initializer:0.1.5
+          image: {{ include "vizivault-platform.image" (dict "root" .Values "app" .Values.initializer.image ) }}
           args:
             - scripts/initialize-vizivault
           env:

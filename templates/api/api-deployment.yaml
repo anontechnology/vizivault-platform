@@ -77,6 +77,29 @@ spec:
               value: "50051"
             - name: SPRING_RABBITMQ_VIRTUAL_HOST
               value: "/"
+      initContainers:
+        - name: initialize-api
+          image: {{ include "vizivault-platform.image" (dict "root" .Values "app" .Values.initializer.image ) }}
+          args:
+            - scripts/initialize-api
+          env:
+            - name: MONGO_HOST
+              value: {{ include "vizivault-platform.databaseHost" . | quote }}
+            - name: MONGO_PORT
+              value: {{ include "vizivault-platform.databasePort" . | quote }}
+            - name: MONGO_USERNAME
+              value: vizivault-platform
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "vizivault-platform.databaseSecretName" . }}
+                  key: mongodb-password
+            - name: MONGO_AUTH_SOURCE
+              value: {{ include "vizivault-platform.authDb" . | quote }}
+            - name: RABBIT_HOST
+              value: {{ include "vizivault-platform.rabbitHost" . | quote }}
+            - name: RABBIT_PORT
+              value: {{ include "vizivault-platform.rabbitPort" . | quote }}
       {{- include "vizivault-platform.imagePullSecrets" . | nindent 6 }}
       {{- with .Values.api.nodeSelector }}
       nodeSelector:
