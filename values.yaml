@@ -25,7 +25,7 @@ vizivault:
   image:
     repository: anontech/vault-enterprise
     tag: latest
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
   admin:
     username: vizivault
     password:
@@ -41,7 +41,7 @@ api:
   image:
     repository: anontech/nox
     tag: latest
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
   service:
     type: ClusterIP
 
@@ -51,7 +51,7 @@ alerts:
   image:
     repository: anontech/nova
     tag: latest
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
   service:
     type: ClusterIP
 
@@ -61,7 +61,7 @@ cipher:
   image:
     repository: anontech/cipher
     tag: latest
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
   service:
     type: ClusterIP
 
@@ -71,7 +71,7 @@ arbiter:
   image:
     repository: anontech/arbiter
     tag: latest
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
   service:
     type: ClusterIP
 
