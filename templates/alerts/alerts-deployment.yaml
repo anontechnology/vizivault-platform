@@ -71,6 +71,17 @@ spec:
               value: {{ printf "mongodb://$(DATABASE_USER):$(DATABASE_PASSWORD)@$(DATABASE_HOST):$(DATABASE_PORT)/alerts?authSource=$(DATABASE_AUTH_SOURCE)"}}
             - name: SIGNING_KEY_PATH
               value: key/secret.key
+      initContainers:
+        - name: initialize-alerts
+          image: {{ include "vizivault-platform.image" (dict "root" .Values "app" .Values.initializer.image ) }}
+          args:
+            - "wait-for-it"
+            - "-h"
+            - {{ include "vizivault-platform.databaseHost" . | quote }}
+            - "-p"
+            - {{ include "vizivault-platform.databasePort" . | quote }}
+            - "-t"
+            - "180"
       {{- include "vizivault-platform.imagePullSecrets" . | nindent 6 }}
       volumes:
         - name: credentials

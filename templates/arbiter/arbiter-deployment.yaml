@@ -64,6 +64,17 @@ spec:
               port: grpc
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      initContainers:
+        - name: initialize-arbiter
+          image: {{ include "vizivault-platform.image" (dict "root" .Values "app" .Values.initializer.image ) }}
+          args:
+            - "wait-for-it"
+            - "-h"
+            - {{ include "vizivault-platform.databaseHost" . | quote }}
+            - "-p"
+            - {{ include "vizivault-platform.databasePort" . | quote }}
+            - "-t"
+            - "180"
       {{- include "vizivault-platform.imagePullSecrets" . | nindent 6 }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
