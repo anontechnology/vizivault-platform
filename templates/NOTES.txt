@@ -1,4 +1,5 @@
 {{- $webAppUrl := "http://localhost" }}
+{{- $apiAppUrl := "http://localhost" }}
 
 You have successfully deployed the ViziVault Platform!
 
@@ -51,33 +52,45 @@ To access the Vizivault REST API:
 1. Obtain the URL
 
 {{- if .Values.ingress.api.enabled }}
+  {{- $apiAppUrl = include "vizivault-platform.apiUrl" . }}
 
   If properly configured, you may find the API running at:
-  {{ include "vizivault-platform.apiUrl" . }}
+  {{ $apiAppUrl }}
 
 {{- else if contains "ClusterIP" .Values.api.service.type }}
+  {{- $apiAppUrl = "http://127.0.0.1:8081" }}
 
   Port forward the application by running the following command:
   kubectl port-forward --namespace {{ .Release.Namespace }} svc/vizivault-platform-api-service 8081:8080
 
   The API should now be reachable at:
-  http://127.0.0.1:8081
+  {{ $apiAppUrl }}
 
 {{- else if contains "NodePort" .Values.vizivault.service.type  }}
+  {{- $apiAppUrl = "http://$VIZIVAULT_IP:$VIZIVAULT_PORT/" }}
 
   Determine the API address by running the following:
   export VIZIVAULT_API_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services vizivault-platform-api-service)
   export VIZIVAULT_API_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
-  echo "ViziVault API URL: http://$VIZIVAULT_API_IP:$VIZIVAULT_API_PORT/"
+  echo "ViziVault API URL: "{{ $apiAppUrl }}"
 
 {{- end }}
 
-2. Obtain a valid API Key from the Web Application
+2. Obtain a crypto key pair for use with the API
+
+  Generate a new key pair by issuing a POST request, see the example below:
+  curl --location --request POST '{{ $apiAppUrl }}/keys/generate'
+
+  ################################################################################################
+  # WARNING: Store the key pair securely and safely, loss of the keys may result in loss of data #
+  ################################################################################################
+
+3. Obtain a valid API Key from the Web Application
 
   As an administrator, create and obtain a new API Key at:
   {{ $webAppUrl }}/admin/applications
 
-3. Begin using the REST API with the API Key
+4. Begin using the REST API with the API Key and Crypto Key Pair
 
   Additional documentation can be found at:
   https://docs.anontech.io/api/endpoints/
