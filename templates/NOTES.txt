@@ -82,7 +82,7 @@ To access the Vizivault REST API:
   curl --location --request POST '{{ $apiAppUrl }}/keys/generate'
 
   ################################################################################################
-  # WARNING: Store the key pair securely and safely, loss of the keys may result in loss of data #
+  # WARNING: Store the key pair securely and safely, loss of the keys may result in a loss of data #
   ################################################################################################
 
 3. Obtain a valid API Key from the Web Application
