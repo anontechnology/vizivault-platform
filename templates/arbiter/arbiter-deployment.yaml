@@ -54,7 +54,7 @@ spec:
               value: webapp
           ports:
             - name: grpc
-              containerPort: 50051
+              containerPort: 50052
               protocol: TCP
           livenessProbe:
             tcpSocket:
