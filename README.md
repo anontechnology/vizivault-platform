@@ -1,5 +1,7 @@
 # ViziVault Platform
 
+Manage personal information (PI) as-a-service safely, securely, and in compliance with data privacy regulations using ViziVault.
+
 ## TL;DR
 
 ```
