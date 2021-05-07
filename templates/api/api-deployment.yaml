@@ -67,6 +67,11 @@ spec:
                   key: rabbitmq-password
             - name: NOX_API_AUTHORIZATION
               value: "true"
+            - name: NOX_KEYS_EXCHANGE_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: vizivault-platform-secrets
+                  key: vizivault-exchange-token
             - name: CIPHER_HOST
               value: vizivault-platform-cipher-service
             - name: CIPHER_PORT

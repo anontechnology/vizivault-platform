@@ -43,8 +43,9 @@ To log into the ViziVault Platform Web Application:
   Username: {{ .Values.vizivault.admin.username }}
   Password: ********
 
-  To view the admin password, run the following command:
-  kubectl get secret --namespace {{ .Release.Namespace }} vizivault-platform-secrets -o jsonpath="{.data.vizivault-admin-password}" | base64 --decode
+  To view the admin password, run the following commands:
+  VIZIVAULT_PASSWORD=$(kubectl get secret --namespace {{ .Release.Namespace }} vizivault-platform-secrets -o jsonpath="{.data.vizivault-admin-password}" | base64 --decode)
+  echo $VIZIVAULT_PASSWORD
 
 
 To access the Vizivault REST API:
