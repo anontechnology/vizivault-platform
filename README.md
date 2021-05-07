@@ -170,6 +170,7 @@ For additional configuration of the MongoDB® Chart, see the [MongoDB® Helm Cha
 | `rabbit.password`        | Password to connect to the RabbitMQ instance | _random 10 character long alphanumeric string_ |
 | `rabbit.host`            | Hostname to connect to the RabbitMQ instance | `rabbitmq.local`                               |
 | `rabbit.port`            | Port to connect to the RabbitMQ instance     | `5672`                                         |
+| `rabbit.virtualHost`     | Virtual host to use on the RabbitMQ instance | `/`                                            |
 
 For additional configuration of the RabbitMQ Chart, see the [RabbitMQ Helm Chart](https://github.com/bitnami/charts/tree/master/bitnami/rabbitmq)
 

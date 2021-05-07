@@ -168,6 +168,17 @@ Return the RabbitMQ Secret Name
 {{- end -}}
 
 {{/*
+Return the RabbitMQ Virtual Host
+*/}}
+{{- define "vizivault-platform.rabbitVirtualHost" -}}
+{{- if .Values.rabbitmq.enabled }}
+    {{- printf "%s" "/" -}}
+{{- else -}}
+    {{- printf "%s" ( .Values.rabbit.virtualHost ) -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Define the external url for the webapp
 */}}
 {{- define "vizivault-platform.appUrl" -}}
