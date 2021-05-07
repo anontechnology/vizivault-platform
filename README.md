@@ -5,7 +5,7 @@ Manage personal information (PI) as-a-service safely, securely, and in complianc
 ## TL;DR
 
 ```
-$ helm install my-release anontech/vizivault
+$ helm install my-release anontech/vizivault-platform
 ```
 
 ## Introduction
@@ -24,7 +24,7 @@ This [Helm](https://github.com/kubernetes/helm) chart installs the [ViziVault Pl
 Install the chart with the release name `my-release`:
 
 ```bash
-$ helm install my-release anontech/vizivault
+$ helm install my-release anontech/vizivault-platform
 ```
 
 ## Uninstalling the Chart
