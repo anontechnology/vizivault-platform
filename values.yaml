@@ -112,6 +112,8 @@ mongodb:
     database: admin
     username: vizivault-platform
   initdbScriptsConfigMap: vizivault-platform-initdb
+  volumePermissions:
+    enabled: true
 
 # RabbitMQ Configuration
 # https://github.com/bitnami/charts/blob/master/bitnami/rabbitmq/values.yaml
@@ -119,3 +121,5 @@ rabbitmq:
   enabled: true
   auth:
     username: vizivault-platform
+  volumePermissions:
+    enabled: true
