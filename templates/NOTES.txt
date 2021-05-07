@@ -85,11 +85,14 @@ To access the Vizivault REST API:
 
   Obtain the exchange token by running the command:
   VIZIVAULT_EXCHANGE_TOKEN=$(kubectl get secret --namespace {{ .Release.Namespace }} vizivault-platform-secrets -o jsonpath="{.data.vizivault-exchange-token}" | base64 --decode)
+  echo $VIZIVAULT_EXCHANGE_TOKEN
 
-  Generate a new key pair by issuing a POST request, see the example below:
+  Exchange the token for a new key pair by issuing the following request:
   curl --location --request POST '{{ $apiAppUrl }}/keys/exchange' \
   --header 'Content-Type: application/json' \
-  --data-raw "{ \"exchangeToken\": \"${VIZIVAULT_EXCHANGE_TOKEN}\" }"
+  --data-raw "{ \"exchangeToken\": \"${VIZIVAULT_EXCHANGE_TOKEN}\" }" > vault-api-keys.json
+
+  Upon success, the key pair will now be found in the file 'vault-api-keys.json'
 
 3. Obtain a valid API Key from the Web Application
 
