@@ -77,21 +77,26 @@ To access the Vizivault REST API:
 
 {{- end }}
 
-2. Obtain a crypto key pair for use with the API
+2. Obtain a key pair for use with the API
+  ################################################################################################
+  # WARNING: The exchange token may only be used once, make sure to save the result!             #
+  # Store the key pair securely and safely, loss of keys may result in a loss of data            #
+  ################################################################################################
+
+  Obtain the exchange token by running the command:
+  VIZIVAULT_EXCHANGE_TOKEN=$(kubectl get secret --namespace {{ .Release.Namespace }} vizivault-platform-secrets -o jsonpath="{.data.vizivault-exchange-token}" | base64 --decode)
 
   Generate a new key pair by issuing a POST request, see the example below:
-  curl --location --request POST '{{ $apiAppUrl }}/keys/generate'
-
-  ################################################################################################
-  # WARNING: Store the key pair securely and safely, loss of the keys may result in a loss of data #
-  ################################################################################################
+  curl --location --request POST '{{ $apiAppUrl }}/keys/exchange' \
+  --header 'Content-Type: application/json' \
+  --data-raw "{ \"exchangeToken\": \"${VIZIVAULT_EXCHANGE_TOKEN}\" }"
 
 3. Obtain a valid API Key from the Web Application
 
   As an administrator, create and obtain a new API Key at:
   {{ $webAppUrl }}/admin/applications
 
-4. Begin using the REST API with the API Key and Crypto Key Pair
+4. Begin using the REST API with the API key and generated key pair
 
   Additional documentation can be found at:
   https://docs.anontech.io/api/endpoints/
