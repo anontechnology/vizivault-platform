@@ -24,7 +24,7 @@ vizivault:
   name: "webapp"
   image:
     repository: anontech/vault-enterprise
-    tag: latest
+    tag: 0.1.0
     pullPolicy: IfNotPresent
   admin:
     username: vizivault
@@ -40,7 +40,7 @@ api:
   replicas: 1
   image:
     repository: anontech/nox
-    tag: latest
+    tag: 0.1.0
     pullPolicy: IfNotPresent
   service:
     type: ClusterIP
@@ -50,7 +50,7 @@ alerts:
   name: "alerts"
   image:
     repository: anontech/nova
-    tag: latest
+    tag: 0.1.0
     pullPolicy: IfNotPresent
   service:
     type: ClusterIP
@@ -60,7 +60,7 @@ cipher:
   name: "cipher"
   image:
     repository: anontech/cipher
-    tag: latest
+    tag: 0.1.0
     pullPolicy: IfNotPresent
   service:
     type: ClusterIP
@@ -70,7 +70,7 @@ arbiter:
   name: "arbiter"
   image:
     repository: anontech/arbiter
-    tag: latest
+    tag: 0.1.0
     pullPolicy: IfNotPresent
   service:
     type: ClusterIP
