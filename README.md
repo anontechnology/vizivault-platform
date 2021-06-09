@@ -82,6 +82,7 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `ingress.api.annotations`    | Annotations used in the ingress resource                              | `{}`                        |
 | `ingress.api.tls.enabled`    | Enables or disables TLS on the Ingress resource                       | `false`                     |
 | `ingress.api.tls.secretName` | Points to the existing secret name that contains the SSL certificates | `nil`                       |
+
 ### ViziVault Parameters
 | Parameter                  | Description                                                  | Default                                        |
 |----------------------------|--------------------------------------------------------------|------------------------------------------------|
