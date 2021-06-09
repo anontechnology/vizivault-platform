@@ -48,6 +48,9 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `global.registry`    | Global Docker image registry                    | `nil`                                                   |
 | `global.imagePullSecrets` | Global Docker registry secret names as an array | `[]` (does not add image pull secrets to deployed pods) |
 | `global.storageClass`     | Global storage class for dynamic provisioning   | `nil`                                                   |
+| `initializer.image.repository` | Repository for the Initializer image                 | `anontech/initializer`                 |
+| `initializer.image.tag`        | Tag for the Initializer image                        | `{TAG_NAME}`                   |
+| `initializer.image.pullPolicy` | Pull policy for the Initializer image                | `IfNotPresent`                 |
 
 ### Common Parameters
 
