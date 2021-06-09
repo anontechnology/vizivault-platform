@@ -93,6 +93,9 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `vizivault.affinity`       | Affinity for pod assignment                                  | `{}` (evaluated as a template)                |
 | `vizivault.nodeSelector`   | Node labels for pod assignment                               | `{}` (evaluated as a template)                 |
 | `vizivault.tolerations`    | Tolerations for pod assignment                               | `[]` (evaluated as a template)                |
+| `vizivault.image.repository` | Repository for the ViziVault image                         | `anontech/vault-enterprise`                 |
+| `vizivault.image.tag`        | Tag for the ViziVault image                                | `{TAG_NAME}`                   |
+| `vizivault.image.pullPolicy` | Pull policy for the ViziVault image                        | `IfNotPresent`                 |
 
 ### Vault API Parameters
 | Parameter              | Description                                  | Default                        |
