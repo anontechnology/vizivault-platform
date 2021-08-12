@@ -50,6 +50,20 @@ spec:
               value: {{ .Values.vizivault.admin.email | quote }}
             - name: VIZIVAULT_ADMIN_NAME
               value: {{ .Values.vizivault.admin.name | quote }}
+            {{- with .Values.vizivault.oauth }}
+            - name: VIZIVAULT_AUTHENTICATION_METHOD
+              value: {{ ternary  .provider "managed" .enabled }}
+            {{- if .enabled }}
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_APPID_ISSUER_URI
+              value: {{ .issuer }}
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_APPID_PROVIDER
+              value: {{ .provider }}
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_APPID_CLIENTID
+              value: {{ .clientId }}
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_APPID_CLIENTSECRET
+              value: {{ .clientSecret }}
+            {{- end }}
+            {{- end }}
             - name: SPRING_DATA_MONGODB_HOST
               value: {{ include "vizivault-platform.databaseHost" . | quote }}
             - name: SPRING_DATA_MONGODB_PORT

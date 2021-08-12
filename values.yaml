@@ -26,6 +26,12 @@ vizivault:
     repository: anontech/vault-enterprise
     tag: 0.1.0
     pullPolicy: IfNotPresent
+  oauth:
+    enabled: false
+    issuer:
+    provider:
+    clientId:
+    clientSecret:
   admin:
     username: vizivault
     password:
