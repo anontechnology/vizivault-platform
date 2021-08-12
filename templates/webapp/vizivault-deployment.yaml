@@ -55,15 +55,17 @@ spec:
               value: {{ ternary  .provider "managed" .enabled }}
             {{- if .enabled }}
             - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_APPID_ISSUER_URI
-              value: {{ .issuer }}
+              value: {{ .issuer | quote }}
             - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_APPID_PROVIDER
-              value: {{ .provider }}
+              value: {{ .provider | quote }}
             - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_APPID_CLIENTID
-              value: {{ .clientId }}
+              value: {{ .clientId | quote }}
             - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_APPID_CLIENTSECRET
-              value: {{ .clientSecret }}
+              value: {{ .clientSecret | quote }}
             {{- end }}
             {{- end }}
+            - name: SERVER_SERVLET_CONTEXTPATH
+              value: {{ .Values.vizivault.context | quote }}
             - name: SPRING_DATA_MONGODB_HOST
               value: {{ include "vizivault-platform.databaseHost" . | quote }}
             - name: SPRING_DATA_MONGODB_PORT

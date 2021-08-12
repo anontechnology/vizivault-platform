@@ -91,10 +91,11 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `vizivault.admin.email`        | The e-mail address to be set for the ViziVault admin account | `admin.anontech.domain`                        |
 | `vizivault.admin.name`         | The full name to be used for the ViziVault admin account     | `ViziVault Admin`                              |
 | `vizivault.oauth.enabled`      | Chooses whether or not to enable OAuth2 authentication       | `false`                                        |
-| `vizivault.oauth.issuer`       | The issuer URL for OAuth2                                     | `undefined`                                    |
+| `vizivault.oauth.issuer`       | The issuer URL for OAuth2                                    | `undefined`                                    |
 | `vizivault.oauth.provider`     | The OAuth2 provider name                                     | `undefined`                                    |
 | `vizivault.oauth.clientId`     | The OAuth2 client ID                                         | `undefined`                                    |
 | `vizivault.oauth.clientSecret` | The OAuth2 client secret                                     | `undefined`                                    |
+| `vizivault.context`            | The context path that ViziVault listens on                   | `/`                                            |
 | `vizivault.resources`          | The resources to allocate for the deployment                 | `undefined`                                    |
 | `vizivault.affinity`           | Affinity for pod assignment                                  | `{} (evaluated as a template)`                 |
 | `vizivault.nodeSelector`       | Node labels for pod assignment                               | `{} (evaluated as a template)`                 |
