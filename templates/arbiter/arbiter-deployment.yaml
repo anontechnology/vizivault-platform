@@ -35,6 +35,10 @@ spec:
           env:
             - name: HOSTNAME
               value: 0.0.0.0
+            {{- if and (not .Values.mongodb.enabled) .Values.database.uri }}
+            - name: MONGO_URI
+              value: {{ .Values.database.uri | quote }}
+            {{- else }}
             - name: DATABASE_HOST
               value: {{ include "vizivault-platform.databaseHost" . | quote }}
             - name: DATABASE_PORT
@@ -52,6 +56,7 @@ spec:
               value: {{ printf "mongodb://$(DATABASE_USER):$(DATABASE_PASSWORD)@$(DATABASE_HOST):$(DATABASE_PORT)/?authSource=$(DATABASE_AUTH_SOURCE)"}}
             - name: MONGO_AUTH_DB
               value: webapp
+            {{- end }}
           ports:
             - name: grpc
               containerPort: 50052

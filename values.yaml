@@ -90,7 +90,9 @@ initializer:
 
 # Database Configuration
 # These values will be ignored if mongodb.enabled is set to true
+# If `uri` is provided, it will override any additional variables listed
 database:
+  uri:
   authDb: admin
   username: vizivault-platform
   password:
