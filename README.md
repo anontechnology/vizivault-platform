@@ -84,19 +84,24 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `ingress.api.tls.secretName` | Points to the existing secret name that contains the SSL certificates | `nil`                       |
 
 ### ViziVault Parameters
-| Parameter                  | Description                                                  | Default                                        |
-|----------------------------|--------------------------------------------------------------|------------------------------------------------|
-| `vizivault.admin.username` | The username to be created for the ViziVault admin account   | `vizivault`                                    |
-| `vizivault.admin.password` | The password to be set for the ViziVault admin account       | _random 10 character long alphanumeric string_ |
-| `vizivault.admin.email`    | The e-mail address to be set for the ViziVault admin account | `admin.anontech.domain`                        |
-| `vizivault.admin.name`     | The full name to be used for the ViziVault admin account     | `ViziVault Admin`                              |
-| `vizivault.resources`      | The resources to allocate for the deployment                 | `undefined`                                    |
-| `vizivault.affinity`       | Affinity for pod assignment                                  | `{}` (evaluated as a template)                |
-| `vizivault.nodeSelector`   | Node labels for pod assignment                               | `{}` (evaluated as a template)                 |
-| `vizivault.tolerations`    | Tolerations for pod assignment                               | `[]` (evaluated as a template)                |
-| `vizivault.image.repository` | Repository for the ViziVault image                         | `anontech/vault-enterprise`                 |
-| `vizivault.image.tag`        | Tag for the ViziVault image                                | `{TAG_NAME}`                   |
-| `vizivault.image.pullPolicy` | Pull policy for the ViziVault image                        | `IfNotPresent`                 |
+| Parameter                      | Description                                                  | Default                                        |
+|--------------------------------|--------------------------------------------------------------|------------------------------------------------|
+| `vizivault.admin.username`     | The username to be created for the ViziVault admin account   | `vizivault`                                    |
+| `vizivault.admin.password`     | The password to be set for the ViziVault admin account       | _random 10 character long alphanumeric string_ |
+| `vizivault.admin.email`        | The e-mail address to be set for the ViziVault admin account | `admin.anontech.domain`                        |
+| `vizivault.admin.name`         | The full name to be used for the ViziVault admin account     | `ViziVault Admin`                              |
+| `vizivault.oauth.enabled`      | Chooses whether or not to enable OAuth2 authentication       | `false`                                        |
+| `vizivault.oauth.issuer`       | The issuer URL for OAuth2                                     | `undefined`                                    |
+| `vizivault.oauth.provider`     | The OAuth2 provider name                                     | `undefined`                                    |
+| `vizivault.oauth.clientId`     | The OAuth2 client ID                                         | `undefined`                                    |
+| `vizivault.oauth.clientSecret` | The OAuth2 client secret                                     | `undefined`                                    |
+| `vizivault.resources`          | The resources to allocate for the deployment                 | `undefined`                                    |
+| `vizivault.affinity`           | Affinity for pod assignment                                  | `{} (evaluated as a template)`                 |
+| `vizivault.nodeSelector`       | Node labels for pod assignment                               | `{} (evaluated as a template)`                 |
+| `vizivault.tolerations`        | Tolerations for pod assignment                               | `[] (evaluated as a template)`                 |
+| `vizivault.image.repository`   | Repository for the ViziVault image                           | `anontech/vault-enterprise`                    |
+| `vizivault.image.tag`          | Tag for the ViziVault image                                  | `{TAG_NAME}`                                   |
+| `vizivault.image.pullPolicy`   | Pull policy for the ViziVault image                          | `IfNotPresent`                                 |
 
 ### Vault API Parameters
 | Parameter              | Description                                  | Default                        |
