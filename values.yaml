@@ -23,6 +23,7 @@ ingress:
 vizivault:
   name: "webapp"
   context: /
+  initializer: true
   image:
     repository: anontech/vault-enterprise
     tag: 0.1.0
@@ -45,6 +46,7 @@ vizivault:
 api:
   name: "api"
   replicas: 1
+  initializer: true
   image:
     repository: anontech/nox
     tag: 0.1.0

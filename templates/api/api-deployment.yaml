@@ -87,29 +87,31 @@ spec:
               value: vizivault-platform-arbiter-service
             - name: ARBITER_PORT
               value: "50051"
-      # initContainers:
-      #   - name: initialize-api
-      #     image: {{ include "vizivault-platform.image" (dict "root" .Values "app" .Values.initializer.image ) }}
-      #     args:
-      #       - scripts/initialize-api
-      #     env:
-      #       - name: MONGO_HOST
-      #         value: {{ include "vizivault-platform.databaseHost" . | quote }}
-      #       - name: MONGO_PORT
-      #         value: {{ include "vizivault-platform.databasePort" . | quote }}
-      #       - name: MONGO_USERNAME
-      #         value: vizivault-platform
-      #       - name: MONGO_PASSWORD
-      #         valueFrom:
-      #           secretKeyRef:
-      #             name: {{ include "vizivault-platform.databaseSecretName" . }}
-      #             key: mongodb-password
-      #       - name: MONGO_AUTH_SOURCE
-      #         value: {{ include "vizivault-platform.authDb" . | quote }}
-      #       - name: RABBIT_HOST
-      #         value: {{ include "vizivault-platform.rabbitHost" . | quote }}
-      #       - name: RABBIT_PORT
-      #         value: {{ include "vizivault-platform.rabbitPort" . | quote }}
+      {{- if .Values.api.initializer }}
+      initContainers:
+        - name: initialize-api
+          image: {{ include "vizivault-platform.image" (dict "root" .Values "app" .Values.initializer.image ) }}
+          args:
+            - scripts/initialize-api
+          env:
+            - name: MONGO_HOST
+              value: {{ include "vizivault-platform.databaseHost" . | quote }}
+            - name: MONGO_PORT
+              value: {{ include "vizivault-platform.databasePort" . | quote }}
+            - name: MONGO_USERNAME
+              value: vizivault-platform
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "vizivault-platform.databaseSecretName" . }}
+                  key: mongodb-password
+            - name: MONGO_AUTH_SOURCE
+              value: {{ include "vizivault-platform.authDb" . | quote }}
+            - name: RABBIT_HOST
+              value: {{ include "vizivault-platform.rabbitHost" . | quote }}
+            - name: RABBIT_PORT
+              value: {{ include "vizivault-platform.rabbitPort" . | quote }}
+      {{- end }}
       {{- include "vizivault-platform.imagePullSecrets" . | nindent 6 }}
       {{- with .Values.api.nodeSelector }}
       nodeSelector:

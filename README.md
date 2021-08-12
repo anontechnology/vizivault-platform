@@ -96,10 +96,11 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `vizivault.oauth.clientId`     | The OAuth2 client ID                                         | `undefined`                                    |
 | `vizivault.oauth.clientSecret` | The OAuth2 client secret                                     | `undefined`                                    |
 | `vizivault.context`            | The context path that ViziVault listens on                   | `/`                                            |
+| `vizivault.initializer`        | Run the initializer container                                | `true`                                         |
 | `vizivault.resources`          | The resources to allocate for the deployment                 | `undefined`                                    |
-| `vizivault.affinity`           | Affinity for pod assignment                                  | `{} (evaluated as a template)`                 |
-| `vizivault.nodeSelector`       | Node labels for pod assignment                               | `{} (evaluated as a template)`                 |
-| `vizivault.tolerations`        | Tolerations for pod assignment                               | `[] (evaluated as a template)`                 |
+| `vizivault.affinity`           | Affinity for pod assignment                                  | `{}` (evaluated as a template)                 |
+| `vizivault.nodeSelector`       | Node labels for pod assignment                               | `{}` (evaluated as a template)                 |
+| `vizivault.tolerations`        | Tolerations for pod assignment                               | `[]` (evaluated as a template)                 |
 | `vizivault.image.repository`   | Repository for the ViziVault image                           | `anontech/vault-enterprise`                    |
 | `vizivault.image.tag`          | Tag for the ViziVault image                                  | `{TAG_NAME}`                                   |
 | `vizivault.image.pullPolicy`   | Pull policy for the ViziVault image                          | `IfNotPresent`                                 |
@@ -109,6 +110,7 @@ The following tables list the configurable parameters for the ViziVault Platform
 |------------------------|----------------------------------------------|--------------------------------|
 | `api.name`             | The name of the API deployment               | `api`                          |
 | `api.replicas`         | The number of replicas for the API           | `1`                            |
+| `api.initializer`      | Run the initializer container                | `true`                         |
 | `api.image.repository` | Repository for the API image                 | `anontech/nox`                 |
 | `api.image.tag`        | Tag for the API image                        | `{TAG_NAME}`                   |
 | `api.image.pullPolicy` | Pull policy for the API image                | `IfNotPresent`                 |
