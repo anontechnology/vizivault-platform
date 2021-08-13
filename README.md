@@ -84,25 +84,33 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `ingress.api.tls.secretName` | Points to the existing secret name that contains the SSL certificates | `nil`                       |
 
 ### ViziVault Parameters
-| Parameter                  | Description                                                  | Default                                        |
-|----------------------------|--------------------------------------------------------------|------------------------------------------------|
-| `vizivault.admin.username` | The username to be created for the ViziVault admin account   | `vizivault`                                    |
-| `vizivault.admin.password` | The password to be set for the ViziVault admin account       | _random 10 character long alphanumeric string_ |
-| `vizivault.admin.email`    | The e-mail address to be set for the ViziVault admin account | `admin.anontech.domain`                        |
-| `vizivault.admin.name`     | The full name to be used for the ViziVault admin account     | `ViziVault Admin`                              |
-| `vizivault.resources`      | The resources to allocate for the deployment                 | `undefined`                                    |
-| `vizivault.affinity`       | Affinity for pod assignment                                  | `{}` (evaluated as a template)                |
-| `vizivault.nodeSelector`   | Node labels for pod assignment                               | `{}` (evaluated as a template)                 |
-| `vizivault.tolerations`    | Tolerations for pod assignment                               | `[]` (evaluated as a template)                |
-| `vizivault.image.repository` | Repository for the ViziVault image                         | `anontech/vault-enterprise`                 |
-| `vizivault.image.tag`        | Tag for the ViziVault image                                | `{TAG_NAME}`                   |
-| `vizivault.image.pullPolicy` | Pull policy for the ViziVault image                        | `IfNotPresent`                 |
+| Parameter                      | Description                                                  | Default                                        |
+|--------------------------------|--------------------------------------------------------------|------------------------------------------------|
+| `vizivault.admin.username`     | The username to be created for the ViziVault admin account   | `vizivault`                                    |
+| `vizivault.admin.password`     | The password to be set for the ViziVault admin account       | _random 10 character long alphanumeric string_ |
+| `vizivault.admin.email`        | The e-mail address to be set for the ViziVault admin account | `admin.anontech.domain`                        |
+| `vizivault.admin.name`         | The full name to be used for the ViziVault admin account     | `ViziVault Admin`                              |
+| `vizivault.oauth.enabled`      | Chooses whether or not to enable OAuth2 authentication       | `false`                                        |
+| `vizivault.oauth.issuer`       | The issuer URL for OAuth2                                    | `undefined`                                    |
+| `vizivault.oauth.provider`     | The OAuth2 provider name                                     | `undefined`                                    |
+| `vizivault.oauth.clientId`     | The OAuth2 client ID                                         | `undefined`                                    |
+| `vizivault.oauth.clientSecret` | The OAuth2 client secret                                     | `undefined`                                    |
+| `vizivault.context`            | The context path that ViziVault listens on                   | `/`                                            |
+| `vizivault.initializer`        | Run the initializer container                                | `true`                                         |
+| `vizivault.resources`          | The resources to allocate for the deployment                 | `undefined`                                    |
+| `vizivault.affinity`           | Affinity for pod assignment                                  | `{}` (evaluated as a template)                 |
+| `vizivault.nodeSelector`       | Node labels for pod assignment                               | `{}` (evaluated as a template)                 |
+| `vizivault.tolerations`        | Tolerations for pod assignment                               | `[]` (evaluated as a template)                 |
+| `vizivault.image.repository`   | Repository for the ViziVault image                           | `anontech/vault-enterprise`                    |
+| `vizivault.image.tag`          | Tag for the ViziVault image                                  | `{TAG_NAME}`                                   |
+| `vizivault.image.pullPolicy`   | Pull policy for the ViziVault image                          | `IfNotPresent`                                 |
 
 ### Vault API Parameters
 | Parameter              | Description                                  | Default                        |
 |------------------------|----------------------------------------------|--------------------------------|
 | `api.name`             | The name of the API deployment               | `api`                          |
 | `api.replicas`         | The number of replicas for the API           | `1`                            |
+| `api.initializer`      | Run the initializer container                | `true`                         |
 | `api.image.repository` | Repository for the API image                 | `anontech/nox`                 |
 | `api.image.tag`        | Tag for the API image                        | `{TAG_NAME}`                   |
 | `api.image.pullPolicy` | Pull policy for the API image                | `IfNotPresent`                 |
@@ -151,19 +159,21 @@ The following tables list the configurable parameters for the ViziVault Platform
 
 **NOTE:** If `mongodb.enabled` is `true` then the external database values under `database.*` will be ignored
 
-| Parameter                        | Description                                   | Default                                        |
-|----------------------------------|-----------------------------------------------|------------------------------------------------|
-| `mongodb.enabled`                | Enables the deployment of the MongoDB chart   | `true`                                         |
-| `mongodb.architecture`           | MongoDB® architecture                          | `standalone`                                   |
-| `mongodb.useStatefulSet`         | MongoDB® to use a StatefulSet deployment       | `true`                                         |
-| `mongodb.auth.database`          | Database to create the custom user            | `admin`                                        |
-| `mongodb.auth.username`          | Custom username to create                     | `vizivault-platform`                           |
-| `mongodb.initdbScriptsConfigMap` | ConfigMap with a MongoDB® init scripts         | `vizivault-platform-initdb`                    |
-| `database.authDb`                | Authentication database for the user          | `admin`                                        |
-| `database.username`              | Username to connect to the Mongo cluster      | `vizivault-platform`                           |
-| `database.password`              | Password used to connect to the Mongo cluster | _random 10 character long alphanumeric string_ |
-| `database.host`                  | Hostname used to connect to the Mongo cluster | `localhost`                                    |
-| `database.port`                  | Port used to connect to the Mongo cluster     | `27017`                                        |
+| Parameter                        | Description                                              | Default                                        |
+|----------------------------------|----------------------------------------------------------|------------------------------------------------|
+| `mongodb.enabled`                | Enables the deployment of the MongoDB® chart             | `true`                                         |
+| `mongodb.architecture`           | MongoDB® architecture                                    | `standalone`                                   |
+| `mongodb.useStatefulSet`         | MongoDB® to use a StatefulSet deployment                 | `true`                                         |
+| `mongodb.auth.database`          | Database to create the custom user                       | `admin`                                        |
+| `mongodb.auth.username`          | Custom username to create                                | `vizivault-platform`                           |
+| `mongodb.initdbScriptsConfigMap` | ConfigMap with a MongoDB® init scripts                   | `vizivault-platform-initdb`                    |
+| `database.authDb`                | Authentication database for the user                     | `admin`                                        |
+| `database.username`              | Username to connect to the MongoDB® cluster              | `vizivault-platform`                           |
+| `database.password`              | Password used to connect to the MongoDB® cluster         | _random 10 character long alphanumeric string_ |
+| `database.host`                  | Hostname used to connect to the MongoDB® cluster         | `localhost`                                    |
+| `database.port`                  | Port used to connect to the MongoDB® cluster             | `27017`                                        |
+| `database.options`               | Additional connection arguments for the MongoDB® cluster | `{}`                                           |
+
 
 For additional configuration of the MongoDB® Chart, see the [MongoDB® Helm Chart](https://github.com/bitnami/charts/tree/master/bitnami/mongodb)
 

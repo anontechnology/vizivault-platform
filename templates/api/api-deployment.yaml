@@ -39,21 +39,13 @@ spec:
           resources:
             {{- toYaml .Values.api.resources | nindent 12 }}
           env:
-            - name: SPRING_DATA_MONGODB_HOST
-              value: {{ include "vizivault-platform.databaseHost" . | quote }}
-            - name: SPRING_DATA_MONGODB_PORT
-              value: {{ include "vizivault-platform.databasePort" . | quote }}
-            - name: SPRING_DATA_MONGODB_USERNAME
-              value: vizivault-platform
-            - name: SPRING_DATA_MONGODB_PASSWORD
+            - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ include "vizivault-platform.databaseSecretName" . }}
                   key: mongodb-password
-            - name: SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE
-              value: {{ include "vizivault-platform.authDb" . | quote }}
-            - name: SPRING_DATA_MONGODB_DATABASE
-              value: vault
+            - name: SPRING_DATA_MONGODB_URI
+              value: {{ include "vizivault-platform.databaseURI" (dict "root" . "db" .Values.api.database) | quote}}
             - name: SPRING_RABBITMQ_HOST
               value: {{ include "vizivault-platform.rabbitHost" . | quote }}
             - name: SPRING_RABBITMQ_PORT
@@ -67,6 +59,8 @@ spec:
                   key: rabbitmq-password
             - name: SPRING_RABBITMQ_VIRTUAL_HOST
               value: {{ include "vizivault-platform.rabbitVirtualHost" . | quote }}
+            - name: SPRING_RABBITMQ_SSL_ENABLED
+              value: {{ include "vizivault-platform.rabbitSSL" . | quote }}
             - name: NOX_API_AUTHORIZATION
               value: "true"
             - name: NOX_KEYS_EXCHANGE_TOKEN
@@ -82,6 +76,7 @@ spec:
               value: vizivault-platform-arbiter-service
             - name: ARBITER_PORT
               value: "50051"
+      {{- if .Values.api.initializer }}
       initContainers:
         - name: initialize-api
           image: {{ include "vizivault-platform.image" (dict "root" .Values "app" .Values.initializer.image ) }}
@@ -105,6 +100,7 @@ spec:
               value: {{ include "vizivault-platform.rabbitHost" . | quote }}
             - name: RABBIT_PORT
               value: {{ include "vizivault-platform.rabbitPort" . | quote }}
+      {{- end }}
       {{- include "vizivault-platform.imagePullSecrets" . | nindent 6 }}
       {{- with .Values.api.nodeSelector }}
       nodeSelector:

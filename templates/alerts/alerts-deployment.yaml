@@ -54,21 +54,13 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
-            - name: DATABASE_HOST
-              value: {{ include "vizivault-platform.databaseHost" . | quote }}
-            - name: DATABASE_PORT
-              value: {{ include "vizivault-platform.databasePort" . | quote }}
-            - name: DATABASE_AUTH_SOURCE
-              value: {{ include "vizivault-platform.authDb" . | quote }}
-            - name: DATABASE_USER
-              value: vizivault-platform
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ include "vizivault-platform.databaseSecretName" . }}
                   key: mongodb-password
             - name: MONGO_URI
-              value: {{ printf "mongodb://$(DATABASE_USER):$(DATABASE_PASSWORD)@$(DATABASE_HOST):$(DATABASE_PORT)/alerts?authSource=$(DATABASE_AUTH_SOURCE)"}}
+              value: {{ include "vizivault-platform.databaseURI" (dict "root" . "db" .Values.alerts.database) | quote}}
             - name: SIGNING_KEY_PATH
               value: key/secret.key
       initContainers:

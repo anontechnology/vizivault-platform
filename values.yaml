@@ -22,10 +22,19 @@ ingress:
 # ViziVault Application
 vizivault:
   name: "webapp"
+  database: webapp
+  context: /
+  initializer: true
   image:
     repository: anontech/vault-enterprise
     tag: 0.1.0
     pullPolicy: IfNotPresent
+  oauth:
+    enabled: false
+    issuer:
+    provider:
+    clientId:
+    clientSecret:
   admin:
     username: vizivault
     password:
@@ -37,7 +46,9 @@ vizivault:
 # Vault API
 api:
   name: "api"
+  database: vault
   replicas: 1
+  initializer: true
   image:
     repository: anontech/nox
     tag: 0.1.0
@@ -48,6 +59,7 @@ api:
 # Notification Service
 alerts:
   name: "alerts"
+  database: alerts
   image:
     repository: anontech/nova
     tag: 0.1.0
@@ -68,6 +80,7 @@ cipher:
 # Arbiter Validation Service
 arbiter:
   name: "arbiter"
+  database: webapp
   image:
     repository: anontech/arbiter
     tag: 0.1.0
@@ -89,7 +102,7 @@ database:
   password:
   host: localhost
   port: 27017
-  secretName:
+  options: {}
 
 # RabbitMQ Configuration
 # These values will be ignored if rabbitmq.enabled is set to true
@@ -98,8 +111,8 @@ rabbit:
   password:
   host: rabbitmq.local
   port: 5672
-  secretName:
   virtualHost: /
+  useSSL: false
 
 
 # MongoDB Configuration

@@ -88,7 +88,7 @@ Return the MongoDB User
 {{- if .Values.mongodb.enabled }}
     {{- printf "%s" .Values.mongodb.auth.username -}}
 {{- else -}}
-    {{- printf "%s" .Values.database.user -}}
+    {{- printf "%s" .Values.database.username -}}
 {{- end -}}
 {{- end -}}
 
@@ -99,7 +99,7 @@ Return the MongoDB Secret Name
 {{- if .Values.mongodb.enabled }}
     {{- printf "%s" (include "vizivault-platform.mongodb.fullname" .) -}}
 {{- else -}}
-    {{- printf "%s" ( .Values.database.secretName ) -}}
+    {{- printf "%s" "vizivault-platform-secrets" -}}
 {{- end -}}
 {{- end -}}
 
@@ -113,6 +113,34 @@ Return the MongoDB Auth DB
 {{- else -}}
     {{- printf "%s" ( .Values.database.authDb ) -}}
 {{- end -}}
+{{- end -}}
+
+{{/*
+Return the MongoDB URI
+*/}}
+{{- define "vizivault-platform.databaseURI" -}}
+
+{{- $username := include "vizivault-platform.databaseUser" .root -}}
+{{- $host := include "vizivault-platform.databaseHost" .root -}}
+{{- $port := include "vizivault-platform.databasePort" .root | int -}}
+{{- $database := .db -}}
+{{- $authSource := include "vizivault-platform.authDb" .root -}}
+{{- $options := "" -}}
+
+{{- range $k, $v := .root.Values.database.options -}}
+  {{- $option := printf "&%s=%v" $k $v -}}
+  {{- $options = print $options $option -}}
+{{- end -}}
+
+{{
+    printf "mongodb://%s:$(DATABASE_PASSWORD)@%s:%d/%s?authSource=%s%s"
+    $username
+    $host
+    $port
+    $database
+    $authSource
+    $options
+}}
 {{- end -}}
 
 {{/*
@@ -152,7 +180,7 @@ Return the RabbitMQ User
 {{- if .Values.rabbitmq.enabled }}
     {{- printf "%s" .Values.rabbitmq.auth.username -}}
 {{- else -}}
-    {{- printf "%s" .Values.rabbit.user -}}
+    {{- printf "%s" .Values.rabbit.username -}}
 {{- end -}}
 {{- end -}}
 
@@ -163,7 +191,7 @@ Return the RabbitMQ Secret Name
 {{- if .Values.rabbitmq.enabled }}
     {{- printf "%s" (include "vizivault-platform.rabbitmq.fullname" .) -}}
 {{- else -}}
-    {{- printf "%s" ( .Values.rabbit.secretName ) -}}
+    {{- printf "%s" "vizivault-platform-secrets" -}}
 {{- end -}}
 {{- end -}}
 
@@ -175,6 +203,17 @@ Return the RabbitMQ Virtual Host
     {{- printf "%s" "/" -}}
 {{- else -}}
     {{- printf "%s" ( .Values.rabbit.virtualHost ) -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Return the RabbitMQ SSL Boolean
+*/}}
+{{- define "vizivault-platform.rabbitSSL" -}}
+{{- if .Values.rabbitmq.enabled }}
+    {{- printf "%t" .Values.rabbitmq.auth.tls.enabled -}}
+{{- else -}}
+    {{- printf "%t" .Values.rabbit.useSSL -}}
 {{- end -}}
 {{- end -}}
 
