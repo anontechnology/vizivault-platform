@@ -109,8 +109,9 @@ rabbit:
   password:
   host: rabbitmq.local
   port: 5672
-  secretName:
+  secretName: vizivault-platform-secrets
   virtualHost: /
+  useSSL: false
 
 
 # MongoDB Configuration
