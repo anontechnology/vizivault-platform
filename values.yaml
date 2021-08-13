@@ -102,7 +102,7 @@ database:
   password:
   host: localhost
   port: 27017
-  secretName:
+  secretName: vizivault-platform-secrets
 
 # RabbitMQ Configuration
 # These values will be ignored if rabbitmq.enabled is set to true
