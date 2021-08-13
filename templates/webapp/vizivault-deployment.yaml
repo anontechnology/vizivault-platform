@@ -99,6 +99,8 @@ spec:
                   key: rabbitmq-password
             - name: SPRING_RABBITMQ_VIRTUAL_HOST
               value: {{ include "vizivault-platform.rabbitVirtualHost" . | quote }}
+            - name: SPRING_RABBITMQ_SSL_ENABLED
+              value: {{ include "vizivault-platform.rabbitSSL" . | quote }}
             - name: NOVA_SERVICE_URI
               value: {{ include "vizivault-platform.appUrl" .  | quote }}
             - name: NOVA_BROADCAST_URI

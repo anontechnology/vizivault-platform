@@ -152,7 +152,7 @@ Return the RabbitMQ User
 {{- if .Values.rabbitmq.enabled }}
     {{- printf "%s" .Values.rabbitmq.auth.username -}}
 {{- else -}}
-    {{- printf "%s" .Values.rabbit.user -}}
+    {{- printf "%s" .Values.rabbit.username -}}
 {{- end -}}
 {{- end -}}
 
@@ -175,6 +175,17 @@ Return the RabbitMQ Virtual Host
     {{- printf "%s" "/" -}}
 {{- else -}}
     {{- printf "%s" ( .Values.rabbit.virtualHost ) -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Return the RabbitMQ SSL Boolean
+*/}}
+{{- define "vizivault-platform.rabbitSSL" -}}
+{{- if .Values.rabbitmq.enabled }}
+    {{- printf "%t" .Values.rabbitmq.auth.tls.enabled -}}
+{{- else -}}
+    {{- printf "%t" .Values.rabbit.useSSL -}}
 {{- end -}}
 {{- end -}}
 
