@@ -159,19 +159,20 @@ The following tables list the configurable parameters for the ViziVault Platform
 
 **NOTE:** If `mongodb.enabled` is `true` then the external database values under `database.*` will be ignored
 
-| Parameter                        | Description                                      | Default                                        |
-|----------------------------------|--------------------------------------------------|------------------------------------------------|
-| `mongodb.enabled`                | Enables the deployment of the MongoDB® chart     | `true`                                         |
-| `mongodb.architecture`           | MongoDB® architecture                            | `standalone`                                   |
-| `mongodb.useStatefulSet`         | MongoDB® to use a StatefulSet deployment         | `true`                                         |
-| `mongodb.auth.database`          | Database to create the custom user               | `admin`                                        |
-| `mongodb.auth.username`          | Custom username to create                        | `vizivault-platform`                           |
-| `mongodb.initdbScriptsConfigMap` | ConfigMap with a MongoDB® init scripts           | `vizivault-platform-initdb`                    |
-| `database.authDb`                | Authentication database for the user             | `admin`                                        |
-| `database.username`              | Username to connect to the MongoDB® cluster      | `vizivault-platform`                           |
-| `database.password`              | Password used to connect to the MongoDB® cluster | _random 10 character long alphanumeric string_ |
-| `database.host`                  | Hostname used to connect to the MongoDB® cluster | `localhost`                                    |
-| `database.port`                  | Port used to connect to the MongoDB® cluster     | `27017`                                        |
+| Parameter                        | Description                                              | Default                                        |
+|----------------------------------|----------------------------------------------------------|------------------------------------------------|
+| `mongodb.enabled`                | Enables the deployment of the MongoDB® chart             | `true`                                         |
+| `mongodb.architecture`           | MongoDB® architecture                                    | `standalone`                                   |
+| `mongodb.useStatefulSet`         | MongoDB® to use a StatefulSet deployment                 | `true`                                         |
+| `mongodb.auth.database`          | Database to create the custom user                       | `admin`                                        |
+| `mongodb.auth.username`          | Custom username to create                                | `vizivault-platform`                           |
+| `mongodb.initdbScriptsConfigMap` | ConfigMap with a MongoDB® init scripts                   | `vizivault-platform-initdb`                    |
+| `database.authDb`                | Authentication database for the user                     | `admin`                                        |
+| `database.username`              | Username to connect to the MongoDB® cluster              | `vizivault-platform`                           |
+| `database.password`              | Password used to connect to the MongoDB® cluster         | _random 10 character long alphanumeric string_ |
+| `database.host`                  | Hostname used to connect to the MongoDB® cluster         | `localhost`                                    |
+| `database.port`                  | Port used to connect to the MongoDB® cluster             | `27017`                                        |
+| `database.options`               | Additional connection arguments for the MongoDB® cluster | `{}`                                           |
 
 
 For additional configuration of the MongoDB® Chart, see the [MongoDB® Helm Chart](https://github.com/bitnami/charts/tree/master/bitnami/mongodb)

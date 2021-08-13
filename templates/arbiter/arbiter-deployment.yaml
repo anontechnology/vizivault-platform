@@ -35,28 +35,15 @@ spec:
           env:
             - name: HOSTNAME
               value: 0.0.0.0
-            {{- if and (not .Values.mongodb.enabled) .Values.database.uri }}
-            - name: MONGO_URI
-              value: {{ .Values.database.uri | quote }}
-            {{- else }}
-            - name: DATABASE_HOST
-              value: {{ include "vizivault-platform.databaseHost" . | quote }}
-            - name: DATABASE_PORT
-              value: {{ include "vizivault-platform.databasePort" . | quote }}
-            - name: DATABASE_AUTH_SOURCE
-              value: {{ include "vizivault-platform.authDb" . | quote }}
-            - name: DATABASE_USER
-              value: vizivault-platform
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ include "vizivault-platform.databaseSecretName" . }}
                   key: mongodb-password
             - name: MONGO_URI
-              value: {{ printf "mongodb://$(DATABASE_USER):$(DATABASE_PASSWORD)@$(DATABASE_HOST):$(DATABASE_PORT)/?authSource=$(DATABASE_AUTH_SOURCE)"}}
+              value: {{ include "vizivault-platform.databaseURI" (dict "root" . "db" "") | quote}}
             - name: MONGO_AUTH_DB
               value: {{ .Values.arbiter.database | quote }}
-            {{- end }}
           ports:
             - name: grpc
               containerPort: 50052

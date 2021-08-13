@@ -88,7 +88,7 @@ Return the MongoDB User
 {{- if .Values.mongodb.enabled }}
     {{- printf "%s" .Values.mongodb.auth.username -}}
 {{- else -}}
-    {{- printf "%s" .Values.database.user -}}
+    {{- printf "%s" .Values.database.username -}}
 {{- end -}}
 {{- end -}}
 
@@ -113,6 +113,34 @@ Return the MongoDB Auth DB
 {{- else -}}
     {{- printf "%s" ( .Values.database.authDb ) -}}
 {{- end -}}
+{{- end -}}
+
+{{/*
+Return the MongoDB URI
+*/}}
+{{- define "vizivault-platform.databaseURI" -}}
+
+{{- $username := include "vizivault-platform.databaseUser" .root -}}
+{{- $host := include "vizivault-platform.databaseHost" .root -}}
+{{- $port := include "vizivault-platform.databasePort" .root | int -}}
+{{- $database := .db -}}
+{{- $authSource := include "vizivault-platform.authDb" .root -}}
+{{- $options := "" -}}
+
+{{- range $k, $v := .root.Values.database.options -}}
+  {{- $option := printf "&%s=%v" $k $v -}}
+  {{- $options = print $options $option -}}
+{{- end -}}
+
+{{
+    printf "mongodb://%s:$(DATABASE_PASSWORD)@%s:%d/%s?authSource=%s%s"
+    $username
+    $host
+    $port
+    $database
+    $authSource
+    $options
+}}
 {{- end -}}
 
 {{/*

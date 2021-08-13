@@ -66,26 +66,13 @@ spec:
             {{- end }}
             - name: SERVER_SERVLET_CONTEXTPATH
               value: {{ .Values.vizivault.context | quote }}
-            {{- if and (not .Values.mongodb.enabled) .Values.database.uri }}
-            - name: SPRING_DATA_MONGODB_URI
-              value: {{ .Values.database.uri | quote }}
-            {{- else }}
-            - name: SPRING_DATA_MONGODB_HOST
-              value: {{ include "vizivault-platform.databaseHost" . | quote }}
-            - name: SPRING_DATA_MONGODB_PORT
-              value: {{ include "vizivault-platform.databasePort" . | quote }}
-            - name: SPRING_DATA_MONGODB_USERNAME
-              value: vizivault-platform
-            - name: SPRING_DATA_MONGODB_PASSWORD
+            - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ include "vizivault-platform.databaseSecretName" . }}
                   key: mongodb-password
-            - name: SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE
-              value: {{ include "vizivault-platform.authDb" . | quote }}
-            - name: SPRING_DATA_MONGODB_DATABASE
-              value: webapp
-            {{- end }}
+            - name: SPRING_DATA_MONGODB_URI
+              value: {{ include "vizivault-platform.databaseURI" (dict "root" . "db" .Values.vizivault.database) | quote}}
             - name: SPRING_RABBITMQ_HOST
               value: {{ include "vizivault-platform.rabbitHost" . | quote }}
             - name: SPRING_RABBITMQ_PORT

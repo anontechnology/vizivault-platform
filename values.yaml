@@ -102,6 +102,7 @@ database:
   password:
   host: localhost
   port: 27017
+  options: {}
 
 # RabbitMQ Configuration
 # These values will be ignored if rabbitmq.enabled is set to true
