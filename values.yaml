@@ -22,6 +22,7 @@ ingress:
 # ViziVault Application
 vizivault:
   name: "webapp"
+  database: webapp
   context: /
   initializer: true
   image:
@@ -45,6 +46,7 @@ vizivault:
 # Vault API
 api:
   name: "api"
+  database: vault
   replicas: 1
   initializer: true
   image:
@@ -57,6 +59,7 @@ api:
 # Notification Service
 alerts:
   name: "alerts"
+  database: alerts
   image:
     repository: anontech/nova
     tag: 0.1.0
@@ -77,6 +80,7 @@ cipher:
 # Arbiter Validation Service
 arbiter:
   name: "arbiter"
+  database: webapp
   image:
     repository: anontech/arbiter
     tag: 0.1.0
@@ -92,9 +96,7 @@ initializer:
 
 # Database Configuration
 # These values will be ignored if mongodb.enabled is set to true
-# If `uri` is provided, it will override any additional variables listed
 database:
-  uri:
   authDb: admin
   username: vizivault-platform
   password:

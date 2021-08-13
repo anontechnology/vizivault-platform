@@ -55,7 +55,7 @@ spec:
             - name: MONGO_URI
               value: {{ printf "mongodb://$(DATABASE_USER):$(DATABASE_PASSWORD)@$(DATABASE_HOST):$(DATABASE_PORT)/?authSource=$(DATABASE_AUTH_SOURCE)"}}
             - name: MONGO_AUTH_DB
-              value: webapp
+              value: {{ .Values.arbiter.database | quote }}
             {{- end }}
           ports:
             - name: grpc
