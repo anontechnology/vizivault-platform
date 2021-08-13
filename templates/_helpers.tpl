@@ -99,7 +99,7 @@ Return the MongoDB Secret Name
 {{- if .Values.mongodb.enabled }}
     {{- printf "%s" (include "vizivault-platform.mongodb.fullname" .) -}}
 {{- else -}}
-    {{- printf "%s" ( .Values.database.secretName ) -}}
+    {{- printf "%s" "vizivault-platform-secrets" -}}
 {{- end -}}
 {{- end -}}
 
@@ -163,7 +163,7 @@ Return the RabbitMQ Secret Name
 {{- if .Values.rabbitmq.enabled }}
     {{- printf "%s" (include "vizivault-platform.rabbitmq.fullname" .) -}}
 {{- else -}}
-    {{- printf "%s" ( .Values.rabbit.secretName ) -}}
+    {{- printf "%s" "vizivault-platform-secrets" -}}
 {{- end -}}
 {{- end -}}
 
