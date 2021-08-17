@@ -99,17 +99,17 @@ spec:
                 secretKeyRef:
                   name: vizivault-platform-secrets
                   key: token-signing-key
-          {{- if .Values.vizivault.caMapRef }}
+          {{- if .Values.vizivault.certificateRef }}
           volumeMounts:
             - name: ca-certs
               mountPath: /usr/local/openjdk-11/lib/security/cacerts
               subPath: cacerts
           {{- end }}
-      {{- if .Values.vizivault.caMapRef }}
+      {{- if .Values.vizivault.certificateRef }}
       volumes:
         - name: ca-certs
           configMap:
-            name: {{ .Values.vizivault.caMapRef }}
+            name: {{ .Values.vizivault.certificateRef }}
             defaultMode: 420
       {{- end }}
       {{- if .Values.vizivault.initializer }}

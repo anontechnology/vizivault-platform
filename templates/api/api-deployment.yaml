@@ -78,17 +78,17 @@ spec:
               value: vizivault-platform-arbiter-service
             - name: ARBITER_PORT
               value: "50051"
-        {{- if .Values.api.caMapRef }}
+        {{- if .Values.api.certificateRef }}
           volumeMounts:
             - name: ca-certs
               mountPath: /usr/local/openjdk-11/lib/security/cacerts
               subPath: cacerts
           {{- end }}
-      {{- if .Values.vizivault.caMapRef }}
+      {{- if .Values.vizivault.certificateRef }}
       volumes:
         - name: ca-certs
           configMap:
-            name: {{ .Values.vizivault.caMapRef }}
+            name: {{ .Values.vizivault.certificateRef }}
             defaultMode: 420
       {{- end }}
       {{- if .Values.api.initializer }}

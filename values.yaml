@@ -25,7 +25,7 @@ vizivault:
   database: webapp
   context: /
   initializer: true
-  caMapRef:
+  certificateRef:
   image:
     repository: anontech/vault-enterprise
     tag: 0.1.0
@@ -50,7 +50,7 @@ api:
   database: vault
   replicas: 1
   initializer: true
-  caMapRef:
+  certificateRef:
   image:
     repository: anontech/nox
     tag: 0.1.0
