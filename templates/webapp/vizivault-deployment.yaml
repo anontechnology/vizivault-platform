@@ -73,6 +73,8 @@ spec:
                   key: mongodb-password
             - name: SPRING_DATA_MONGODB_URI
               value: {{ include "vizivault-platform.databaseURI" (dict "root" . "db" .Values.vizivault.database) | quote}}
+            - name: SPRING_DATA_MONGODB_DATABASE
+              value: {{ .Values.vizivault.database | quote }}
             - name: SPRING_RABBITMQ_HOST
               value: {{ include "vizivault-platform.rabbitHost" . | quote }}
             - name: SPRING_RABBITMQ_PORT
@@ -97,6 +99,19 @@ spec:
                 secretKeyRef:
                   name: vizivault-platform-secrets
                   key: token-signing-key
+          {{- if .Values.vizivault.caMapRef }}
+          volumeMounts:
+            - name: ca-certs
+              mountPath: /usr/local/openjdk-11/lib/security/cacerts
+              subPath: cacerts
+          {{- end }}
+      {{- if .Values.vizivault.caMapRef }}
+      volumes:
+        - name: ca-certs
+          configMap:
+            name: {{ .Values.vizivault.caMapRef }}
+            defaultMode: 420
+      {{- end }}
       {{- if .Values.vizivault.initializer }}
       initContainers:
         - name: initialize-webapp

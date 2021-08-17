@@ -97,6 +97,7 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `vizivault.oauth.clientSecret` | The OAuth2 client secret                                     | `undefined`                                    |
 | `vizivault.context`            | The context path that ViziVault listens on                   | `/`                                            |
 | `vizivault.initializer`        | Run the initializer container                                | `true`                                         |
+| `vizivault.caMapRef`           | Path to config map of trusted certificate authority (CA) certificates | `undefined`                                    |
 | `vizivault.resources`          | The resources to allocate for the deployment                 | `undefined`                                    |
 | `vizivault.affinity`           | Affinity for pod assignment                                  | `{}` (evaluated as a template)                 |
 | `vizivault.nodeSelector`       | Node labels for pod assignment                               | `{}` (evaluated as a template)                 |
@@ -111,6 +112,7 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `api.name`             | The name of the API deployment               | `api`                          |
 | `api.replicas`         | The number of replicas for the API           | `1`                            |
 | `api.initializer`      | Run the initializer container                | `true`                         |
+| `api.caMapRef`           | Path to config map of trusted certificate authority (CA) certificates | `undefined`                                    |
 | `api.image.repository` | Repository for the API image                 | `anontech/nox`                 |
 | `api.image.tag`        | Tag for the API image                        | `{TAG_NAME}`                   |
 | `api.image.pullPolicy` | Pull policy for the API image                | `IfNotPresent`                 |
