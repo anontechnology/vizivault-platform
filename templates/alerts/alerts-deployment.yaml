@@ -36,6 +36,8 @@ spec:
             - mountPath: "/usr/src/app/key"
               name: credentials
               readOnly: true
+            - mountPath: /certs
+              name: certs
           ports:
             - name: http
               containerPort: 3000
@@ -61,6 +63,10 @@ spec:
                   key: mongodb-password
             - name: MONGO_URI
               value: {{ include "vizivault-platform.databaseURI" (dict "root" . "db" .Values.alerts.database) | quote}}
+            {{- if .Values.database.certificate }}
+            - name: MONGO_SSL_CA_PATH
+              value: /certs/mongodb-tls.crt
+            {{- end }}
             - name: SIGNING_KEY_PATH
               value: key/secret.key
       initContainers:
@@ -82,6 +88,10 @@ spec:
             items:
               - key: token-signing-key
                 path: secret.key
+        - name: certs
+          configMap:
+            defaultMode: 420
+            name: vizivault-certs
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

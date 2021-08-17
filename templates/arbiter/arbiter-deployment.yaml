@@ -44,6 +44,9 @@ spec:
               value: {{ include "vizivault-platform.databaseURI" (dict "root" . "db" "") | quote}}
             - name: MONGO_AUTH_DB
               value: {{ .Values.arbiter.database | quote }}
+          volumeMounts:
+            - mountPath: /certs
+              name: certs
           ports:
             - name: grpc
               containerPort: 50052
@@ -67,6 +70,11 @@ spec:
             - {{ include "vizivault-platform.databasePort" . | quote }}
             - "-t"
             - "180"
+      volumes:
+        - name: certs
+          configMap:
+            defaultMode: 420
+            name: vizivault-certs
       {{- include "vizivault-platform.imagePullSecrets" . | nindent 6 }}
       {{- with .Values.nodeSelector }}
       nodeSelector:

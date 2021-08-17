@@ -174,6 +174,7 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `database.password`              | Password used to connect to the MongoDB® cluster         | _random 10 character long alphanumeric string_ |
 | `database.host`                  | Hostname used to connect to the MongoDB® cluster         | `localhost`                                    |
 | `database.port`                  | Port used to connect to the MongoDB® cluster             | `27017`                                        |
+| `database.certificate`               | TLS certificate used to verify SSL connection to the MongoDB® cluster | `undefined`                                           |
 | `database.options`               | Additional connection arguments for the MongoDB® cluster | `{}`                                           |
 
 

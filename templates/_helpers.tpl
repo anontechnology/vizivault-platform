@@ -125,9 +125,16 @@ Return the MongoDB URI
 {{- $port := include "vizivault-platform.databasePort" .root | int -}}
 {{- $database := .db -}}
 {{- $authSource := include "vizivault-platform.authDb" .root -}}
+{{- $certificate := .root.Values.database.certificate -}}
+{{- $dbOptions := .root.Values.database.options -}}
 {{- $options := "" -}}
 
-{{- range $k, $v := .root.Values.database.options -}}
+{{- if $certificate -}}
+    {{- $_ := set $dbOptions "ssl" "true" -}}
+    {{- $_ := set $dbOptions "tlsCaFile" "/certs/mongodb-tls.crt" -}}
+{{- end -}}
+
+{{- range $k, $v := $dbOptions -}}
   {{- $option := printf "&%s=%v" $k $v -}}
   {{- $options = print $options $option -}}
 {{- end -}}
