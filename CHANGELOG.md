@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.3.0] - 2021-08-17
 
 ### Added
-- Added `certificateRef` to allow override of container CA Certificates
+- Added `certificateRef` parameter to allow override of container CA Certificates
+- Added `certificate` parameter to allow database certificate to be provided for verification
 
 ### Fixed
 - Fixed referenced database for API and Webapp services
