@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.3.1] - 2021-08-27
 
 ### Added
-- Added context variables for the web and api deployments
+- Added context variables for the web and API deployment variables
 
 ### Fixed
 - Fixed missing context with ingress templates
