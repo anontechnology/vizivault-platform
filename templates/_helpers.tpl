@@ -245,3 +245,38 @@ Define the external url for the api
     {{- printf "http://%s" .Values.ingress.api.domain -}}
 {{- end -}}
 {{- end -}}
+
+
+
+{{/*
+Generates the context value for the web app
+*/}}
+{{- define "vizivault-platform.webContext" -}}
+{{- if .Values.vizivault.context -}}
+    {{- printf "/%s" .Values.vizivault.context -}}
+{{- else -}}
+    {{- print "/" -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Generates the context value for the alert service
+*/}}
+{{- define "vizivault-platform.alertContext" -}}
+{{- if .Values.vizivault.context -}}
+    {{- printf "/%s/realtime" .Values.vizivault.context -}}
+{{- else -}}
+    {{- print "/realtime" -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Generates the context value for the API service
+*/}}
+{{- define "vizivault-platform.apiContext" -}}
+{{- if .Values.api.context -}}
+    {{- printf "/%s" .Values.api.context -}}
+{{- else -}}
+    {{- print "/" -}}
+{{- end -}}
+{{- end -}}

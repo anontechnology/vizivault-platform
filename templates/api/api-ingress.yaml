@@ -30,7 +30,7 @@ spec:
     - host: {{ .domain }}
       http:
         paths:
-          - path: /
+          - path: {{ include "vizivault-platform.apiContext" $ }}
             pathType: Prefix
             backend:
               service:

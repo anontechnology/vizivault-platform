@@ -30,14 +30,14 @@ spec:
     - host: {{ .domain }}
       http:
         paths:
-          - path: /
+          - path: {{ include "vizivault-platform.webContext" $ }}
             pathType: Prefix
             backend:
               service:
                 name: vizivault-platform-web-service
                 port:
                   name: http
-          - path: /realtime
+          - path: {{ include "vizivault-platform.alertContext" $ }}
             pathType: Prefix
             backend:
               service:

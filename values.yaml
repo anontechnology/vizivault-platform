@@ -23,7 +23,7 @@ ingress:
 vizivault:
   name: "webapp"
   database: webapp
-  context: /
+  context:
   initializer: true
   certificateRef:
   image:
@@ -48,6 +48,7 @@ vizivault:
 api:
   name: "api"
   database: vault
+  context:
   replicas: 1
   initializer: true
   certificateRef:
