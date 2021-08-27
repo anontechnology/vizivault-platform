@@ -65,7 +65,7 @@ spec:
             {{- end }}
             {{- end }}
             - name: SERVER_SERVLET_CONTEXTPATH
-              value: {{ .Values.vizivault.context | quote }}
+              value: {{ include "vizivault-platform.webContext" $ }}
             - name: DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
