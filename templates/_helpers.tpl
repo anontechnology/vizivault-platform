@@ -246,7 +246,40 @@ Define the external url for the api
 {{- end -}}
 {{- end -}}
 
-
+{{/*
+Generate authentication settings for the web app
+*/}}
+{{- define "vizivault-platform.authentication" -}}
+{{- with .Values.vizivault.oauth -}}
+- name: VIZIVAULT_AUTHENTICATION_METHOD
+  value: {{ ternary .provider "managed" .enabled }}
+{{- if .enabled }}
+{{- required "A Provider is required when OAuth is enabled" .provider }}
+{{- required "A Client ID is required when OAuth is enabled" .clientId }}
+{{- required "A Client Secret is required when OAuth is enabled" .clientSecret }}
+- name: {{ printf "SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_%s_CLIENTID" .provider | upper }}
+  value: {{ .clientId | quote }}
+- name: {{ printf "SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_%s_CLIENTSECRET" .provider | upper }}
+  value: {{ .clientSecret | quote }}
+{{- if .scope }}
+- name: {{ printf "SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_%s_SCOPE" .provider | upper }}
+  value: {{ .scope | quote }}
+{{- end }}
+{{- if .issuer }}
+- name: {{ printf "SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_%s_ISSUER_URI" .provider | upper }}
+  value: {{ .issuer | quote }}
+{{- end }}
+{{- if .authorization }}
+- name: {{ printf "SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_%s_AUTHORIZATION_URI" .provider | upper }}
+  value: {{ .authorization | quote }}
+{{- end }}
+{{- if .token }}
+- name: {{ printf "SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_%s_TOKEN_URI" .provider | upper }}
+  value: {{ .token | quote }}
+{{- end }}
+{{- end -}}
+{{- end -}}
+{{- end -}}
 
 {{/*
 Generates the context value for the web app
