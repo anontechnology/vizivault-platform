@@ -50,20 +50,7 @@ spec:
               value: {{ .Values.vizivault.admin.email | quote }}
             - name: VIZIVAULT_ADMIN_NAME
               value: {{ .Values.vizivault.admin.name | quote }}
-            {{- with .Values.vizivault.oauth }}
-            - name: VIZIVAULT_AUTHENTICATION_METHOD
-              value: {{ ternary  .provider "managed" .enabled }}
-            {{- if .enabled }}
-            - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_APPID_ISSUER_URI
-              value: {{ .issuer | quote }}
-            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_APPID_PROVIDER
-              value: {{ .provider | quote }}
-            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_APPID_CLIENTID
-              value: {{ .clientId | quote }}
-            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_APPID_CLIENTSECRET
-              value: {{ .clientSecret | quote }}
-            {{- end }}
-            {{- end }}
+            {{- include "vizivault-platform.authentication" . | nindent 12  }}
             - name: SERVER_SERVLET_CONTEXTPATH
               value: {{ include "vizivault-platform.webContext" $ }}
             - name: DATABASE_PASSWORD

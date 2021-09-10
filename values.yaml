@@ -32,10 +32,13 @@ vizivault:
     pullPolicy: IfNotPresent
   oauth:
     enabled: false
-    issuer:
     provider:
     clientId:
     clientSecret:
+    issuer:
+    authorization:
+    token:
+    scope:
   admin:
     username: vizivault
     password:
