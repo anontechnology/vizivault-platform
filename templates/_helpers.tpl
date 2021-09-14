@@ -254,9 +254,9 @@ Generate authentication settings for the web app
 - name: VIZIVAULT_AUTHENTICATION_METHOD
   value: {{ ternary .provider "managed" .enabled }}
 {{- if .enabled }}
-{{- required "A Provider is required when OAuth is enabled" .provider }}
-{{- required "A Client ID is required when OAuth is enabled" .clientId }}
-{{- required "A Client Secret is required when OAuth is enabled" .clientSecret }}
+{{- $unused := required "A Provider is required when OAuth is enabled" .provider }}
+{{- $unused := required "A Client ID is required when OAuth is enabled" .clientId }}
+{{- $unused := required "A Client Secret is required when OAuth is enabled" .clientSecret }}
 - name: {{ printf "SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_%s_CLIENTID" .provider | upper }}
   value: {{ .clientId | quote }}
 - name: {{ printf "SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_%s_CLIENTSECRET" .provider | upper }}
