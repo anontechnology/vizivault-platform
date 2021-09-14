@@ -2,7 +2,7 @@
 apiVersion: {{ template "common.capabilities.ingress.apiVersion" . }}
 kind: Ingress
 metadata:
-  name: vizivault-platform-web-ingress
+  name: vizivault-platform-http-ingress
   labels:
     app.kubernetes.io/name: {{ .Release.Name }}
     helm.sh/chart: {{ include "vizivault-platform.chart" . }}
@@ -37,12 +37,5 @@ spec:
                 name: vizivault-platform-web-service
                 port:
                   name: http
-          - path: {{ include "vizivault-platform.alertContext" $ }}
-            pathType: Prefix
-            backend:
-              service:
-                name: vizivault-platform-alerts-service
-                port:
-                  name: ws
 {{- end }}
 {{- end }}
