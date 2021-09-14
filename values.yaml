@@ -28,7 +28,7 @@ vizivault:
   certificateRef:
   image:
     repository: anontech/vault-enterprise
-    tag: 0.1.0
+    tag: 0.2.1
     pullPolicy: IfNotPresent
   oauth:
     enabled: false
