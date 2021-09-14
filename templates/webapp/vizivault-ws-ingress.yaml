@@ -1,0 +1,42 @@
+{{- if .Values.ingress.web.enabled -}}
+apiVersion: {{ template "common.capabilities.ingress.apiVersion" . }}
+kind: Ingress
+metadata:
+  name: vizivault-platform-ws-ingress
+  labels:
+    app.kubernetes.io/name: {{ .Release.Name }}
+    helm.sh/chart: {{ include "vizivault-platform.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  annotations:
+    {{- if .Values.ingress.web.annotations  }}
+    {{- include "common.tplvalues.render" (dict "value" .Values.ingress.web.annotations  "context" $ ) | nindent 4 }}
+    {{- end }}
+    {{- if .Values.commonAnnotations }}
+    {{- include "common.tplvalues.render" (dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- end }}
+    nginx.ingress.kubernetes.io/rewrite-target: /realtime/
+spec:
+{{- with .Values.ingress.web }}
+{{- if .tls.enabled }}
+  tls:
+    - hosts:
+        - {{ .domain }}
+      secretName: {{ .tls.secretName }}
+{{- end }}
+  rules:
+    - host: {{ .domain }}
+      http:
+        paths:
+          - path: {{ include "vizivault-platform.alertContext" $ }}
+            pathType: Prefix
+            backend:
+              service:
+                name: vizivault-platform-alerts-service
+                port:
+                  name: ws
+{{- end }}
+{{- end }}
