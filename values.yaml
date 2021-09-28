@@ -97,7 +97,7 @@ arbiter:
 initializer:
   image:
     repository: anontech/initializer
-    tag: 0.1.8
+    tag: 0.2.0
     pullPolicy: IfNotPresent
 
 # Database Configuration

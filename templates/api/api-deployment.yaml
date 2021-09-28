@@ -111,6 +111,12 @@ spec:
                   key: mongodb-password
             - name: MONGO_AUTH_SOURCE
               value: {{ include "vizivault-platform.authDb" . | quote }}
+            {{- if .Values.database.certificate }}
+            - name: MONGO_SSL_ENABLED
+              value: "true"
+            {{- end }}
+            - name: MONGO_NAMESPACE
+              value: {{ .Values.vizivault.context | quote }}
             - name: RABBIT_HOST
               value: {{ include "vizivault-platform.rabbitHost" . | quote }}
             - name: RABBIT_PORT
