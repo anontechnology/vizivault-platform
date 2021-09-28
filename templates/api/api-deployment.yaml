@@ -103,7 +103,7 @@ spec:
             - name: MONGO_PORT
               value: {{ include "vizivault-platform.databasePort" . | quote }}
             - name: MONGO_USERNAME
-              value: vizivault-platform
+              value: {{ include "vizivault-platform.databaseUser" . | quote }}
             - name: MONGO_PASSWORD
               valueFrom:
                 secretKeyRef:
