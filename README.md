@@ -48,6 +48,7 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `global.registry`    | Global Docker image registry                    | `nil`                                                   |
 | `global.imagePullSecrets` | Global Docker registry secret names as an array | `[]` (does not add image pull secrets to deployed pods) |
 | `global.storageClass`     | Global storage class for dynamic provisioning   | `nil`                                                   |
+| `global.nodeSelector`     | Node labels for pod assignment               | `{}` (evaluated as a template) |
 | `initializer.image.repository` | Repository for the Initializer image                 | `anontech/initializer`                 |
 | `initializer.image.tag`        | Tag for the Initializer image                        | `{TAG_NAME}`                   |
 | `initializer.image.pullPolicy` | Pull policy for the Initializer image                | `IfNotPresent`                 |
@@ -103,7 +104,6 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `vizivault.certificateRef`           | Path to config map of trusted certificate authority (CA) certificates | `undefined`                                    |
 | `vizivault.resources`          | The resources to allocate for the deployment                 | `undefined`                                    |
 | `vizivault.affinity`           | Affinity for pod assignment                                  | `{}` (evaluated as a template)                 |
-| `vizivault.nodeSelector`       | Node labels for pod assignment                               | `{}` (evaluated as a template)                 |
 | `vizivault.tolerations`        | Tolerations for pod assignment                               | `[]` (evaluated as a template)                 |
 | `vizivault.image.repository`   | Repository for the ViziVault image                           | `anontech/vault-enterprise`                    |
 | `vizivault.image.tag`          | Tag for the ViziVault image                                  | `{TAG_NAME}`                                   |
@@ -122,7 +122,6 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `api.image.pullPolicy` | Pull policy for the API image                | `IfNotPresent`                 |
 | `api.resources`        | The resources to allocate for the deployment | `undefined`                    |
 | `api.affinity`         | Affinity for pod assignment                  | `{}` (evaluated as a template) |
-| `api.nodeSelector`     | Node labels for pod assignment               | `{}` (evaluated as a template) |
 | `api.tolerations`      | Tolerations for pod assignment               | `[]` (evaluated as a template) |
 
 ### Alerting Parameters
@@ -134,7 +133,6 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `alerts.image.pullPolicy` | Pull policy for the Alerts image             | `IfNotPresent`                 |
 | `alerts.resources`        | The resources to allocate for the deployment | `undefined`                    |
 | `alerts.affinity`         | Affinity for pod assignment                  | `{}` (evaluated as a template) |
-| `alerts.nodeSelector`     | Node labels for pod assignment               | `{}` (evaluated as a template) |
 | `alerts.tolerations`      | Tolerations for pod assignment               | `[]` (evaluated as a template) |
 
 ### Crypto Parameters
@@ -146,7 +144,6 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `cipher.image.pullPolicy` | Pull policy for the Cipher image             | `IfNotPresent`                 |
 | `cipher.resources`        | The resources to allocate for the deployment | `undefined`                    |
 | `cipher.affinity`         | Affinity for pod assignment                  | `{}` (evaluated as a template) |
-| `cipher.nodeSelector`     | Node labels for pod assignment               | `{}` (evaluated as a template) |
 | `cipher.tolerations`      | Tolerations for pod assignment               | `[]` (evaluated as a template) |
 
 ### Authorization Parameters
@@ -158,7 +155,6 @@ The following tables list the configurable parameters for the ViziVault Platform
 | `arbiter.image.pullPolicy` | Pull policy for the Arbiter image            | `IfNotPresent`                 |
 | `arbiter.resources`        | The resources to allocate for the deployment | `undefined`                    |
 | `arbiter.affinity`         | Affinity for pod assignment                  | `{}` (evaluated as a template) |
-| `arbiter.nodeSelector`     | Node labels for pod assignment               | `{}` (evaluated as a template) |
 | `arbiter.tolerations`      | Tolerations for pod assignment               | `[]` (evaluated as a template) |
 
 ### Database Parameters

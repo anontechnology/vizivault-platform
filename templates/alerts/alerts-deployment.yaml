@@ -92,7 +92,7 @@ spec:
           configMap:
             defaultMode: 420
             name: vizivault-certs
-      {{- with .Values.nodeSelector }}
+      {{- with .Values.global.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}

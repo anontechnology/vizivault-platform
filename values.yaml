@@ -2,6 +2,7 @@ global:
   registry: us.icr.io
   imagePullSecrets:
     - all-icr-io
+  nodeSelector: {}
 
 ingress:
   web:

@@ -131,7 +131,7 @@ spec:
               value: {{ include "vizivault-platform.rabbitPort" . | quote }}
       {{- end }}
       {{- include "vizivault-platform.imagePullSecrets" . | nindent 6 }}
-      {{- with .Values.vizivault.nodeSelector }}
+      {{- with .Values.global.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
