@@ -90,7 +90,7 @@ arbiter:
   database: webapp
   image:
     repository: anontech/arbiter
-    tag: 0.1.0
+    tag: 0.2.0
     pullPolicy: IfNotPresent
   service:
     type: ClusterIP
